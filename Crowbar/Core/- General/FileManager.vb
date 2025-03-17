@@ -8,6 +8,11 @@ Public Class FileManager
 
 #Region "Read Methods"
 
+	Public Shared Function ReadString(ByVal bytes As Byte()) As String
+
+		Return Encoding.UTF8.GetString(bytes)
+	End Function
+
 	Public Shared Function ReadNullTerminatedString(ByVal inputFileReader As BinaryReader) As String
 		Dim bytes As New List(Of Byte)
 
@@ -19,21 +24,21 @@ Public Class FileManager
 			bytes.Add(b)
 		End While
 
-		Return Encoding.UTF8.GetString(bytes.ToArray())
+		Return ReadString(bytes.ToArray())
 	End Function
 
 	Public Shared Function ReadNullTerminatedString(ByVal inputFileReader As BufferedBinaryReader) As String
-		Dim text As New StringBuilder()
-		text.Length = 0
-		Dim aCharacter As Char
+		Dim bytes As New List(Of Byte)
+
 		While True
-			aCharacter = inputFileReader.ReadChar()
-			If aCharacter = ControlChars.NullChar Then
+			Dim b As Byte = inputFileReader.ReadByte()
+			If b = 0 Then
 				Exit While
 			End If
-			text.Append(aCharacter)
+			bytes.Add(b)
 		End While
-		Return text.ToString()
+
+		Return ReadString(bytes.ToArray())
 	End Function
 
 	'Public Function ReadKeyValueLine(ByVal textFileReader As StreamReader, ByVal key As String) As String

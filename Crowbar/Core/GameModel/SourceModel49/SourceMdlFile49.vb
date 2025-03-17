@@ -2795,7 +2795,7 @@ Public Class SourceMdlFile49
 
 				Dim aModel As New SourceMdlModel()
 
-				aModel.name = Me.theInputFileReader.ReadChars(64)
+				aModel.name = FileManager.ReadString(Me.theInputFileReader.ReadBytes(64)).ToCharArray()
 				aModel.type = Me.theInputFileReader.ReadInt32()
 				aModel.boundingRadius = Me.theInputFileReader.ReadSingle()
 				aModel.meshCount = Me.theInputFileReader.ReadInt32()
