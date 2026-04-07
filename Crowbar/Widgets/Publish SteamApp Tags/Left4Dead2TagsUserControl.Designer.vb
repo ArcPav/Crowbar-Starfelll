@@ -447,7 +447,7 @@ Partial Class Left4Dead2TagsUserControl
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(64, 13)
 		Me.Label1.TabIndex = 0
-		Me.Label1.Text = "SURVIVORS"
+		Me.Label1.Text = "幸存者"
 		'
 		'Label2
 		'
@@ -456,7 +456,7 @@ Partial Class Left4Dead2TagsUserControl
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(56, 13)
 		Me.Label2.TabIndex = 10
-		Me.Label2.Text = "INFECTED"
+		Me.Label2.Text = "感染者"
 		'
 		'Label3
 		'
@@ -465,7 +465,7 @@ Partial Class Left4Dead2TagsUserControl
 		Me.Label3.Name = "Label3"
 		Me.Label3.Size = New System.Drawing.Size(85, 13)
 		Me.Label3.TabIndex = 21
-		Me.Label3.Text = "GAME CONTENT"
+		Me.Label3.Text = "游戏内容"
 		'
 		'Label4
 		'
@@ -474,7 +474,7 @@ Partial Class Left4Dead2TagsUserControl
 		Me.Label4.Name = "Label4"
 		Me.Label4.Size = New System.Drawing.Size(73, 13)
 		Me.Label4.TabIndex = 29
-		Me.Label4.Text = "GAME MODES"
+		Me.Label4.Text = "游戏模式"
 		'
 		'Label5
 		'
@@ -483,7 +483,7 @@ Partial Class Left4Dead2TagsUserControl
 		Me.Label5.Name = "Label5"
 		Me.Label5.Size = New System.Drawing.Size(57, 13)
 		Me.Label5.TabIndex = 38
-		Me.Label5.Text = "WEAPONS"
+		Me.Label5.Text = "武器"
 		'
 		'Label6
 		'
@@ -492,7 +492,7 @@ Partial Class Left4Dead2TagsUserControl
 		Me.Label6.Name = "Label6"
 		Me.Label6.Size = New System.Drawing.Size(37, 13)
 		Me.Label6.TabIndex = 49
-		Me.Label6.Text = "ITEMS"
+		Me.Label6.Text = "物品"
 		'
 		'SpecialInfectedCheckBox
 		'

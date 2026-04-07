@@ -14,6 +14,7 @@ Public Class OptionsUserControl
 	Protected Overrides Sub Init()
 		Me.SingleInstanceCheckBox.DataBindings.Add("Checked", TheApp.Settings, "AppIsSingleInstance", False, DataSourceUpdateMode.OnPropertyChanged)
 
+		Me.EnableDarkModeCheckBox.DataBindings.Add("Checked", TheApp.Settings, "EnableDarkMode", False, DataSourceUpdateMode.OnPropertyChanged)
 		' Auto-Open
 
 		Me.AutoOpenVpkFileCheckBox.DataBindings.Add("Checked", TheApp.Settings, "OptionsAutoOpenVpkFileIsChecked", False, DataSourceUpdateMode.OnPropertyChanged)
@@ -56,6 +57,8 @@ Public Class OptionsUserControl
 		Me.OptionsContextMenuCompileFolderAndSubfoldersCheckBox.DataBindings.Add("Checked", TheApp.Settings, "OptionsCompileFolderAndSubfoldersIsChecked", False, DataSourceUpdateMode.OnPropertyChanged)
 
 		Me.UpdateApplyPanel()
+
+		Me.CurrentFontLabel.Text = $"字体: {TheApp.Settings.AppFontName} | 大小: {TheApp.Settings.AppFontSize}pt"
 
 		AddHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
 	End Sub
@@ -238,6 +241,27 @@ Public Class OptionsUserControl
 		Me.ApplyAllAutoOpenOptions()
 	End Sub
 
+	Private Sub ChangeFontButton_Click(sender As Object, e As EventArgs) Handles ChangeFontButton.Click
+		Using fontDialog As New FontDialog()
+			Try
+				fontDialog.Font = New Font(TheApp.Settings.AppFontName, TheApp.Settings.AppFontSize)
+			Catch ex As Exception
+			End Try
+
+			If fontDialog.ShowDialog() = DialogResult.OK Then
+				TheApp.Settings.AppFontName = fontDialog.Font.Name
+				TheApp.Settings.AppFontSize = fontDialog.Font.Size
+
+				Me.CurrentFontLabel.Text = $"字体: {fontDialog.Font.Name} | 大小: {fontDialog.Font.Size}pt"
+
+				Dim mainForm As MainForm = TryCast(Me.FindForm(), MainForm)
+				If mainForm IsNot Nothing Then
+					mainForm.ApplyGlobalFont(fontDialog.Font.Name, fontDialog.Font.Size)
+				End If
+			End If
+		End Using
+	End Sub
+
 #End Region
 
 #Region "Core Event Handlers"
@@ -310,6 +334,7 @@ Public Class OptionsUserControl
 		Me.ApplyAutoOpenQcFileOptions()
 
 		Me.UpdateApplyPanel()
+		Me.CurrentFontLabel.Text = $"字体: {TheApp.Settings.AppFontName} | 大小: {TheApp.Settings.AppFontSize}pt"
 	End Sub
 
 	Private Sub UpdateApplyPanel()

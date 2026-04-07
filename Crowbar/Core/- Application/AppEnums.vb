@@ -3,100 +3,100 @@ Imports System.ComponentModel
 Public Module AppEnums
 
 	Public Enum InputOptions
-		<Description("File")> File
-		<Description("Folder")> Folder
-		<Description("Folder and subfolders")> FolderRecursion
+		<Description("文件")> File
+		<Description("文件夹")> Folder
+		<Description("文件夹和子文件夹")> FolderRecursion
 	End Enum
 
 	Public Enum DownloadOutputPathOptions
 		'<Description("Downloads folder")> DownloadsFolder
-		<Description("Documents folder")> DocumentsFolder
-		<Description("Work folder")> WorkFolder
+		<Description("文档文件夹")> DocumentsFolder
+		<Description("工作文件夹")> WorkFolder
 	End Enum
 
 	Public Enum UnpackOutputPathOptions
-		<Description("Same folder (as Package)")> SameFolder
-		<Description("Subfolder (of Package)")> Subfolder
-		<Description("Work folder")> WorkFolder
-		<Description("Game's addons folder")> GameAddonsFolder
+		<Description("同一文件夹(of Package)")> SameFolder
+		<Description("子文件夹(of Package)")> Subfolder
+		<Description("工作文件夹")> WorkFolder
+		<Description("游戏的addons文件夹")> GameAddonsFolder
 	End Enum
 
 	Public Enum DecompileOutputPathOptions
-		<Description("Work folder")> WorkFolder
-		<Description("Subfolder (of MDL input)")> Subfolder
+		<Description("工作文件夹")> WorkFolder
+		<Description("子文件夹(of MDL input)")> Subfolder
 	End Enum
 
 	Public Enum CompileOutputPathOptions
-		<Description("Game's ""models"" folder")> GameModelsFolder
-		<Description("Work folder")> WorkFolder
-		<Description("Subfolder (of QC input)")> Subfolder
+		<Description("游戏的models文件夹")> GameModelsFolder
+		<Description("工作文件夹")> WorkFolder
+		<Description("子文件夹(of QC input)")> Subfolder
 	End Enum
 
 	Public Enum PackInputOptions
-		<Description("Folder")> Folder
-		<Description("Parent of child folders")> ParentFolder
+		<Description("文件夹")> Folder
+		<Description("子文件夹的父文件夹")> ParentFolder
 	End Enum
 
 	Public Enum PackOutputPathOptions
-		<Description("Work folder")> WorkFolder
-		<Description("Parent folder")> ParentFolder
+		<Description("工作文件夹")> WorkFolder
+		<Description("父文件夹")> ParentFolder
 	End Enum
 
 	Public Enum PublishSearchFieldOptions
 		<Description("ID")> ID
-		<Description("Owner")> Owner
-		<Description("Title")> Title
-		<Description("Description")> Description
-		<Description("[All fields]")> AllFields
+		<Description("所有者")> Owner
+		<Description("标题")> Title
+		<Description("描述")> Description
+		<Description("[所有字段]")> AllFields
 	End Enum
 
 	Public Enum StatusMessage
-		<Description("Success")> Success
-		<Description("Error")> [Error]
-		<Description("Canceled")> Canceled
-		<Description("Skipped")> Skipped
+		<Description("成功")> Success
+		<Description("错误")> [Error]
+		<Description("已取消")> Canceled
+		<Description("已跳过")> Skipped
 
-		<Description("ErrorUnableToCreateTempFolder")> ErrorUnableToCreateTempFolder
+		<Description("无法创建临时文件夹")> ErrorUnableToCreateTempFolder
 
-		<Description("ErrorRequiredSequenceGroupMdlFileNotFound")> ErrorRequiredSequenceGroupMdlFileNotFound
-		<Description("ErrorRequiredTextureMdlFileNotFound")> ErrorRequiredTextureMdlFileNotFound
+		<Description("找不到必需的序列文件")> ErrorRequiredSequenceGroupMdlFileNotFound
+		<Description("找不到必需的贴图文件")> ErrorRequiredTextureMdlFileNotFound
 
-		<Description("ErrorRequiredMdlFileNotFound")> ErrorRequiredMdlFileNotFound
-		<Description("ErrorRequiredAniFileNotFound")> ErrorRequiredAniFileNotFound
-		<Description("ErrorRequiredVtxFileNotFound")> ErrorRequiredVtxFileNotFound
-		<Description("ErrorRequiredVvdFileNotFound")> ErrorRequiredVvdFileNotFound
+		<Description("找不到必需的MDL文件")> ErrorRequiredMdlFileNotFound
+		<Description("找不到必需的ANI文件")> ErrorRequiredAniFileNotFound
+		<Description("找不到必需的VTX文件")> ErrorRequiredVtxFileNotFound
+		<Description("找不到必需的VVD文件")> ErrorRequiredVvdFileNotFound
 
-		<Description("ErrorInvalidMdlFileId")> ErrorInvalidMdlFileId
-		<Description("ErrorInvalidInternalMdlFileSize")> ErrorInvalidInternalMdlFileSize
+		<Description("无效的MDL文件标识符ID")> ErrorInvalidMdlFileId
+		<Description("无效的内部MDL文件大小")> ErrorInvalidInternalMdlFileSize
 	End Enum
 
 	<FlagsAttribute>
 	Public Enum FilesFoundFlags
-		<Description("AllFilesFound")> AllFilesFound = 0
-		<Description("ErrorRequiredSequenceGroupMdlFileNotFound")> ErrorRequiredSequenceGroupMdlFileNotFound = 1
-		<Description("ErrorRequiredTextureMdlFileNotFound")> ErrorRequiredTextureMdlFileNotFound = 2
+		<Description("已找到所需文件")> AllFilesFound = 0
+		<Description("找不到必需的序列文件")> ErrorRequiredSequenceGroupMdlFileNotFound = 1
+		<Description("找不到必需的贴图文件")> ErrorRequiredTextureMdlFileNotFound = 2
 
-		<Description("ErrorRequiredMdlFileNotFound")> ErrorRequiredMdlFileNotFound = 4
-		<Description("ErrorRequiredAniFileNotFound")> ErrorRequiredAniFileNotFound = 8
-		<Description("ErrorRequiredVtxFileNotFound")> ErrorRequiredVtxFileNotFound = 16
-		<Description("ErrorRequiredVvdFileNotFound")> ErrorRequiredVvdFileNotFound = 32
+		<Description("找不到必需的MDL文件")> ErrorRequiredMdlFileNotFound = 4
+		<Description("找不到必需的ANI文件")> ErrorRequiredAniFileNotFound = 8
+		<Description("找不到必需的VTX文件")> ErrorRequiredVtxFileNotFound = 16
+		<Description("找不到必需的VVD文件")> ErrorRequiredVvdFileNotFound = 32
 
-		<Description("Error")> [Error] = 64
+		<Description("错误")> [Error] = 64
 	End Enum
 
 	Public Enum ActionType
-		<Description("Unknown")> Unknown
-		<Description("SetUpGames")> SetUpGames
-		<Description("Download")> Download
-		<Description("Unpack")> Unpack
-		<Description("Preview")> Preview
-		<Description("Decompile")> Decompile
-		<Description("Edit")> Edit
-		<Description("Compile")> Compile
-		<Description("View")> View
-		<Description("Pack")> Pack
-		<Description("Publish")> Publish
-		'<Description("Options")> Options
+		<Description("未知")> Unknown
+		<Description("游戏设置")> SetUpGames
+		<Description("下载")> Download
+		<Description("解包")> Unpack
+		<Description("预览")> Preview
+		<Description("反编译")> Decompile
+		<Description("编辑")> Edit
+		<Description("编译")> Compile
+		<Description("查看")> View
+		<Description("打包")> Pack
+		<Description("发布")> Publish
+		'<Description("选项")> Options
 	End Enum
 
 	Public Enum ContainerType
@@ -116,8 +116,8 @@ Public Module AppEnums
 	End Enum
 
 	Public Enum ViewerType
-		<Description("Preview")> Preview
-		<Description("View")> View
+		<Description("预览")> Preview
+		<Description("查看")> View
 	End Enum
 
 	Public Enum DecompiledFileType
@@ -153,7 +153,7 @@ Public Module AppEnums
 	End Enum
 
 	Public Enum SupportedMdlVersion
-		<Description("Do not override")> DoNotOverride
+		<Description("不要覆盖")> DoNotOverride
 		<Description("06")> MDLv06
 		<Description("10")> MDLv10
 		<Description("2531")> MDLv2531
@@ -179,14 +179,14 @@ Public Module AppEnums
 	End Enum
 
 	Public Enum OrientationType
-		<Description("Horizontal")> Horizontal
-		<Description("Vertical")> Vertical
+		<Description("水平")> Horizontal
+		<Description("垂直")> Vertical
 	End Enum
 
 	Public Enum ByteUnitsOption
-		<Description("Bytes")> Bytes
-		<Description("Binary")> Binary
-		<Description("Decimal")> [Decimal]
+		<Description("字节")> Bytes
+		<Description("二进制")> Binary
+		<Description("十进制")> [Decimal]
 	End Enum
 
 End Module

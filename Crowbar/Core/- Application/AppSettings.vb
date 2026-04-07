@@ -106,6 +106,11 @@ Public Class AppSettings
 		Me.theUpdateUpdateDownloadPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 		Me.theUpdateCopySettingsIsChecked = True
 
+		Me.theEnableDarkMode = False
+
+		Me.theAppFontName = "Microsoft YaHei"
+		Me.theAppFontSize = 9.0F
+
 		'Me.Init()
 	End Sub
 
@@ -1667,6 +1672,42 @@ Public Class AppSettings
 		End Set
 	End Property
 
+	Public Property EnableDarkMode() As Boolean
+		Get
+			Return Me.theEnableDarkMode
+		End Get
+		Set(ByVal value As Boolean)
+			If Me.theEnableDarkMode <> value Then
+				Me.theEnableDarkMode = value
+				NotifyPropertyChanged("EnableDarkMode")
+			End If
+		End Set
+	End Property
+
+	Public Property AppFontName() As String
+		Get
+			Return Me.theAppFontName
+		End Get
+		Set(ByVal value As String)
+			If Me.theAppFontName <> value Then
+				Me.theAppFontName = value
+				NotifyPropertyChanged("AppFontName")
+			End If
+		End Set
+	End Property
+
+	Public Property AppFontSize() As Single
+		Get
+			Return Me.theAppFontSize
+		End Get
+		Set(ByVal value As Single)
+			If Me.theAppFontSize <> value Then
+				Me.theAppFontSize = value
+				NotifyPropertyChanged("AppFontSize")
+			End If
+		End Set
+	End Property
+
 #End Region
 
 #Region "Core Event Handlers"
@@ -2050,6 +2091,10 @@ Public Class AppSettings
 	Private theUpdateUpdateToNewPathIsChecked As Boolean
 	Private theUpdateUpdateDownloadPath As String
 	Private theUpdateCopySettingsIsChecked As Boolean
+
+	Private theEnableDarkMode As Boolean
+	Private theAppFontName As String
+	Private theAppFontSize As Single
 
 #End Region
 

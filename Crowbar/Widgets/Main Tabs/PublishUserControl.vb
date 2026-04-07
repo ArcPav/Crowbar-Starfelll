@@ -25,7 +25,7 @@ Public Class PublishUserControl
 		Me.UseInDownloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.UseInDownloadToolStripMenuItem.Name = "ItemsDataGridViewUseInDownloadToolStripMenuItem"
 		Me.UseInDownloadToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
-		Me.UseInDownloadToolStripMenuItem.Text = "Use in Download"
+		Me.UseInDownloadToolStripMenuItem.Text = "在下载中使用"
 
 		Me.ItemContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.ItemContextMenuStrip.Items.Add(Me.UseInDownloadToolStripMenuItem)
@@ -151,18 +151,18 @@ Public Class PublishUserControl
 			steamPipe.Shut()
 
 			If totalBytes = 0 Then
-				Me.QuotaProgressBar.Text = "unknown"
+				Me.QuotaProgressBar.Text = "未知"
 				Me.QuotaProgressBar.Value = 0
-				Me.ToolTip1.SetToolTip(Me.QuotaProgressBar, "Quota (unknown)")
+				Me.ToolTip1.SetToolTip(Me.QuotaProgressBar, "配额 (未知)")
 			Else
 				Dim usedBytes As ULong = totalBytes - availableBytes
 				Dim progressPercentage As Integer = CInt(usedBytes * Me.QuotaProgressBar.Maximum / totalBytes)
 				Dim availableBytesText As String = MathModule.BinaryByteUnitsConversion(availableBytes)
 				Dim usedBytesText As String = MathModule.BinaryByteUnitsConversion(usedBytes)
 				Dim totalBytesText As String = MathModule.BinaryByteUnitsConversion(totalBytes)
-				Me.QuotaProgressBar.Text = availableBytesText + " available "
+				Me.QuotaProgressBar.Text = availableBytesText + " 可用 "
 				Me.QuotaProgressBar.Value = progressPercentage
-				Me.ToolTip1.SetToolTip(Me.QuotaProgressBar, "Quota: " + usedBytesText + " used of " + totalBytesText + " total (" + progressPercentage.ToString() + "% used)")
+				Me.ToolTip1.SetToolTip(Me.QuotaProgressBar, "配额: " + usedBytesText + " 已使用 " + totalBytesText + " 总计 (" + progressPercentage.ToString() + "% 已使用)")
 			End If
 		End If
 	End Sub
@@ -194,7 +194,7 @@ Public Class PublishUserControl
 		textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
 		textColumn.DataPropertyName = "ID"
 		textColumn.DefaultCellStyle.BackColor = SystemColors.Control
-		textColumn.HeaderText = "Item ID"
+		textColumn.HeaderText = "物品ID"
 		textColumn.Name = "ID"
 		textColumn.ReadOnly = True
 		textColumn.SortMode = DataGridViewColumnSortMode.Automatic
@@ -205,7 +205,7 @@ Public Class PublishUserControl
 		textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
 		textColumn.DataPropertyName = "Title"
 		textColumn.DefaultCellStyle.BackColor = SystemColors.Control
-		textColumn.HeaderText = "Title"
+		textColumn.HeaderText = "标题"
 		textColumn.Name = "Title"
 		textColumn.ReadOnly = True
 		textColumn.SortMode = DataGridViewColumnSortMode.Automatic
@@ -216,7 +216,7 @@ Public Class PublishUserControl
 		textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
 		textColumn.DataPropertyName = "Posted"
 		textColumn.DefaultCellStyle.BackColor = SystemColors.Control
-		textColumn.HeaderText = "Posted"
+		textColumn.HeaderText = "发布时间"
 		textColumn.Name = "Posted"
 		textColumn.ReadOnly = True
 		textColumn.SortMode = DataGridViewColumnSortMode.Automatic
@@ -227,7 +227,7 @@ Public Class PublishUserControl
 		textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
 		textColumn.DataPropertyName = "Updated"
 		textColumn.DefaultCellStyle.BackColor = SystemColors.Control
-		textColumn.HeaderText = "Updated"
+		textColumn.HeaderText = "更新时间"
 		textColumn.Name = "Updated"
 		textColumn.ReadOnly = True
 		textColumn.SortMode = DataGridViewColumnSortMode.Automatic
@@ -238,7 +238,7 @@ Public Class PublishUserControl
 		textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
 		textColumn.DataPropertyName = "Visibility"
 		textColumn.DefaultCellStyle.BackColor = SystemColors.Control
-		textColumn.HeaderText = "Visibility"
+		textColumn.HeaderText = "可见性"
 		textColumn.Name = "Visibility"
 		textColumn.ReadOnly = True
 		textColumn.SortMode = DataGridViewColumnSortMode.Automatic
@@ -249,7 +249,7 @@ Public Class PublishUserControl
 		textColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
 		textColumn.DataPropertyName = "OwnerName"
 		textColumn.DefaultCellStyle.BackColor = SystemColors.Control
-		textColumn.HeaderText = "Owner"
+		textColumn.HeaderText = "所有者"
 		textColumn.Name = "Owner"
 		textColumn.ReadOnly = True
 		textColumn.SortMode = DataGridViewColumnSortMode.Automatic
@@ -469,7 +469,7 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub SaveAsTemplateOrDraftItemButton_Click(sender As Object, e As EventArgs) Handles SaveAsTemplateOrDraftItemButton.Click
-		If SaveAsTemplateOrDraftItemButton.Text = "Save as Template" Then
+		If SaveAsTemplateOrDraftItemButton.Text = "保存为模板" Then
 			Me.SaveItemAsTemplate()
 		Else
 			Me.AddDraftItem(Me.theSelectedItem)
@@ -703,7 +703,7 @@ Public Class PublishUserControl
 		Else
 			Dim result As String = CType(e.Result, String)
 			If result = "success" Then
-				Me.LogTextBox.AppendText("Delete of published item succeeded." + vbCrLf)
+				Me.LogTextBox.AppendText("删除已发布物品成功." + vbCrLf)
 				If Me.theExpectedPublishedItemCount > 0 Then
 					Me.theExpectedPublishedItemCount -= 1UI
 				Else
@@ -712,7 +712,7 @@ Public Class PublishUserControl
 				End If
 				Me.UpdateAfterDeleteItem()
 			Else
-				Me.LogTextBox.AppendText("ERROR: " + result + vbCrLf)
+				Me.LogTextBox.AppendText("错误: " + result + vbCrLf)
 				Me.UpdateItemDetailButtons()
 			End If
 		End If
@@ -1134,37 +1134,37 @@ Public Class PublishUserControl
 			If Me.theDisplayedItems.Count <> Me.theEntireListOfItems.Count Then
 				Me.ItemCountsToolStripLabel.Text += draftItemsDisplayedCount.ToString() + "/"
 			End If
-			Me.ItemCountsToolStripLabel.Text += draftItemsTotalCount.ToString() + " draft + "
+			Me.ItemCountsToolStripLabel.Text += draftItemsTotalCount.ToString() + " 草稿 + "
 			If Me.theDisplayedItems.Count <> Me.theEntireListOfItems.Count Then
 				'Me.ItemCountsToolStripLabel.Text += Me.theTemplateItemDisplayedCount.ToString() + "/"
 				Me.ItemCountsToolStripLabel.Text += Me.theDisplayedItems.TemplateItemCount.ToString() + "/"
 			End If
 			'Me.ItemCountsToolStripLabel.Text += Me.theTemplateItemTotalCount.ToString() + " template + "
-			Me.ItemCountsToolStripLabel.Text += Me.theEntireListOfItems.TemplateItemCount.ToString() + " template + "
+			Me.ItemCountsToolStripLabel.Text += Me.theEntireListOfItems.TemplateItemCount.ToString() + " 模板 + "
 			If Me.theDisplayedItems.Count <> Me.theEntireListOfItems.Count Then
 				'Me.ItemCountsToolStripLabel.Text += Me.theChangedItemDisplayedCount.ToString() + "/"
 				Me.ItemCountsToolStripLabel.Text += Me.theDisplayedItems.ChangedItemCount.ToString() + "/"
 			End If
 			'Me.ItemCountsToolStripLabel.Text += Me.theChangedItemTotalCount.ToString() + " changed + "
-			Me.ItemCountsToolStripLabel.Text += Me.theEntireListOfItems.ChangedItemCount.ToString() + " changed + "
+			Me.ItemCountsToolStripLabel.Text += Me.theEntireListOfItems.ChangedItemCount.ToString() + " 改动 + "
 			If Me.theDisplayedItems.Count <> Me.theEntireListOfItems.Count Then
 				Me.ItemCountsToolStripLabel.Text += publishedItemsDisplayedCount.ToString() + "/"
 			End If
-			Me.ItemCountsToolStripLabel.Text += publishedItemsTotalCount.ToString() + " published"
+			Me.ItemCountsToolStripLabel.Text += publishedItemsTotalCount.ToString() + " 已发布"
 			If isProgress Then
 				Dim remainingPublishedItemsCount As UInteger = Me.theExpectedPublishedItemCount - publishedItemsTotalCount
-				Me.ItemCountsToolStripLabel.Text += " (" + remainingPublishedItemsCount.ToString() + " more to get)"
+				Me.ItemCountsToolStripLabel.Text += " (" + remainingPublishedItemsCount.ToString() + " 还需要)"
 			Else
 				'If (publishedItemsTotalCount + Me.theChangedItemTotalCount) <> Me.theExpectedPublishedItemCount Then
 				If (publishedItemsTotalCount + Me.theEntireListOfItems.ChangedItemCount) <> Me.theExpectedPublishedItemCount Then
-					Me.ItemCountsToolStripLabel.Text += " (" + Me.theExpectedPublishedItemCount.ToString() + " expected)"
+					Me.ItemCountsToolStripLabel.Text += " (" + Me.theExpectedPublishedItemCount.ToString() + " 预期)"
 				End If
 			End If
 			Me.ItemCountsToolStripLabel.Text += " = "
 			If Me.theDisplayedItems.Count <> Me.theEntireListOfItems.Count Then
 				Me.ItemCountsToolStripLabel.Text += Me.theDisplayedItems.Count.ToString() + "/"
 			End If
-			Me.ItemCountsToolStripLabel.Text += Me.theEntireListOfItems.Count.ToString() + " total"
+			Me.ItemCountsToolStripLabel.Text += Me.theEntireListOfItems.Count.ToString() + " 总计"
 		End If
 	End Sub
 
@@ -1253,7 +1253,7 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.IsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
-		Me.ItemGroupBox.Text = "Item" + changedMarker
+		Me.ItemGroupBox.Text = "物品" + changedMarker
 	End Sub
 
 	Private Sub UpdateItemTitleLabel()
@@ -1263,7 +1263,7 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.TitleIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
-		Me.ItemTitleLabel.Text = "Title" + changedMarker + " (" + titleSize.ToString() + " / " + titleSizeMax.ToString() + " characters max):"
+		Me.ItemTitleLabel.Text = "标题" + changedMarker + " (" + titleSize.ToString() + " / " + titleSizeMax.ToString() + " 最多字数):"
 	End Sub
 
 	Private Sub UpdateItemDescriptionLabel()
@@ -1273,7 +1273,7 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.DescriptionIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
-		Me.ItemDescriptionLabel.Text = "Description" + changedMarker + " (" + descriptionSize.ToString() + " / " + descriptionSizeMax.ToString() + " characters max):"
+		Me.ItemDescriptionLabel.Text = "描述" + changedMarker + " (" + descriptionSize.ToString() + " / " + descriptionSizeMax.ToString() + " 最多字数):"
 	End Sub
 
 	Private Sub UpdateItemChangeNoteLabel()
@@ -1283,13 +1283,13 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.ChangeNoteIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
-		Me.ItemChangeNoteLabel.Text = "Change Note" + changedMarker + " (" + changeNoteSize.ToString() + " / " + changeNoteSizeMax.ToString() + " characters max):"
+		Me.ItemChangeNoteLabel.Text = "改动说明" + changedMarker + " (" + changeNoteSize.ToString() + " / " + changeNoteSizeMax.ToString() + " 最多字数):"
 	End Sub
 
 	Private Sub UpdateItemContentLabel()
 		Dim contentFileSizeText As String = "0"
 		If TheApp.SteamAppInfos(TheApp.Settings.PublishGameSelectedIndex).CanUseContentFolderOrFile Then
-			Me.ItemContentFolderOrFileLabel.Text = "Content Folder or File"
+			Me.ItemContentFolderOrFileLabel.Text = "内容文件夹或文件"
 			If Directory.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
 				Dim folderSize As ULong = FileManager.GetFolderSize(Me.theSelectedItem.ContentPathFolderOrFileName)
 				contentFileSizeText = MathModule.BinaryByteUnitsConversion(folderSize)
@@ -1300,7 +1300,7 @@ Public Class PublishUserControl
 				contentFileSizeText = MathModule.BinaryByteUnitsConversion(CULng(Me.theSelectedItem.ContentSize))
 			End If
 		ElseIf TheApp.SteamAppInfos(TheApp.Settings.PublishGameSelectedIndex).UsesSteamUGC Then
-			Me.ItemContentFolderOrFileLabel.Text = "Content Folder"
+			Me.ItemContentFolderOrFileLabel.Text = "内容文件夹"
 			If Directory.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
 				Dim folderSize As ULong = FileManager.GetFolderSize(Me.theSelectedItem.ContentPathFolderOrFileName)
 				contentFileSizeText = MathModule.BinaryByteUnitsConversion(folderSize)
@@ -1308,7 +1308,7 @@ Public Class PublishUserControl
 				contentFileSizeText = MathModule.BinaryByteUnitsConversion(CULng(Me.theSelectedItem.ContentSize))
 			End If
 		Else
-			Me.ItemContentFolderOrFileLabel.Text = "Content File"
+			Me.ItemContentFolderOrFileLabel.Text = "文件"
 			If File.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
 				Dim aFile As New FileInfo(Me.theSelectedItem.ContentPathFolderOrFileName)
 				contentFileSizeText = MathModule.BinaryByteUnitsConversion(CULng(aFile.Length))
@@ -1347,7 +1347,7 @@ Public Class PublishUserControl
 		End If
 		'NOTE: Not sure what max size is, so do not show it.
 		'Me.ItemPreviewImageLabel.Text = "Preview Image" + changedMarker + " (" + previewImageSizeText + " / " + previewImageSizeMaxText + " MB max):"
-		Me.ItemPreviewImageLabel.Text = "Preview Image" + changedMarker
+		Me.ItemPreviewImageLabel.Text = "预览图" + changedMarker
 		If previewImageSizeText <> "0" Then
 			Me.ItemPreviewImageLabel.Text += " (" + previewImageSizeText + ")"
 		End If
@@ -1394,7 +1394,7 @@ Public Class PublishUserControl
 				Me.ItemPreviewImagePictureBox.Image.Save(previewImagePathFileName, anImageFormat)
 			Catch ex As Exception
 				If Not File.Exists(previewImagePathFileName) Then
-					Me.LogTextBox.AppendText("ERROR: Crowbar tried to save preview image to temp file """ + previewImagePathFileName + """ but Windows gave this message: " + ex.Message)
+					Me.LogTextBox.AppendText("错误: Crowbar尝试将预览图保存到临时文件 """ + previewImagePathFileName + """ 但Windows返回了该消息: " + ex.Message)
 				End If
 			End Try
 			If File.Exists(previewImagePathFileName) Then
@@ -1439,7 +1439,7 @@ Public Class PublishUserControl
 			Try
 				File.Delete(previewImagePathFileName)
 			Catch ex As Exception
-				Me.LogTextBox.AppendText("ERROR: Crowbar tried to delete an old temp file """ + previewImagePathFileName + """ but Windows gave this message: " + ex.Message)
+				Me.LogTextBox.AppendText("错误: Crowbar尝试删除旧的临时文件 """ + previewImagePathFileName + """ 但Windows返回了该消息: " + ex.Message)
 			End Try
 		End If
 	End Sub
@@ -1467,7 +1467,7 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.VisibilityIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
-		Me.ItemVisibilityLabel.Text = "Visibility" + changedMarker + ":"
+		Me.ItemVisibilityLabel.Text = "可见性" + changedMarker + ":"
 	End Sub
 
 	Private Sub UpdateItemTagsLabel()
@@ -1475,7 +1475,7 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.TagsIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
-		Me.ItemTagsGroupBox.Text = "Tags" + changedMarker
+		Me.ItemTagsGroupBox.Text = "标签" + changedMarker
 	End Sub
 
 	Private Sub UpdateItemDetailButtons()
@@ -1490,18 +1490,18 @@ Public Class PublishUserControl
 
 		Me.SaveAsTemplateOrDraftItemButton.Enabled = True
 		If Me.theSelectedItem.IsTemplate Then
-			Me.SaveAsTemplateOrDraftItemButton.Text = "Save as Draft"
+			Me.SaveAsTemplateOrDraftItemButton.Text = "保存为草稿"
 		Else
-			Me.SaveAsTemplateOrDraftItemButton.Text = "Save as Template"
+			Me.SaveAsTemplateOrDraftItemButton.Text = "保存为模板"
 		End If
 
 		'Me.RefreshOrRevertItemButton.Visible = True
 		'Me.RefreshOrRevertItemButton.Enabled = (Me.theSelectedItem.ID <> "" AndAlso Not Me.theSelectedItem.IsDraft)
 		Me.RefreshOrRevertItemButton.Enabled = (Me.theSelectedItem.IsPublished) OrElse (Me.theSelectedItem.IsTemplate AndAlso Me.theSelectedItem.IsChanged)
 		If (Me.theSelectedItem.IsTemplate) OrElse (Me.theSelectedItem.IsPublished AndAlso Me.theSelectedItem.IsChanged) Then
-			Me.RefreshOrRevertItemButton.Text = "Revert"
+			Me.RefreshOrRevertItemButton.Text = "撤销"
 		Else
-			Me.RefreshOrRevertItemButton.Text = "Refresh"
+			Me.RefreshOrRevertItemButton.Text = "刷新"
 		End If
 
 		Me.OpenWorkshopPageButton.Visible = (Not Me.theSelectedItem.IsTemplate)
@@ -1515,9 +1515,9 @@ Public Class PublishUserControl
 		'NOTE: SteamRemoteStorage_PublishWorkshopFile requires Item to have a Title, a Description, a Content File, and a Preview Image.
 		Me.PublishItemButton.Enabled = (((Me.theSelectedItem.IsDraft) AndAlso (Me.theSelectedItem.Title <> "" AndAlso Me.theSelectedItem.Description <> "" AndAlso Me.theSelectedItem.ContentPathFolderOrFileName <> "" AndAlso Me.theSelectedItem.PreviewImagePathFileName <> "")) OrElse (Me.theSelectedItem.IsChanged AndAlso (Me.theUserSteamID = Me.theSelectedItem.OwnerID)) OrElse (Me.theSelectedItem.IsTemplate))
 		If Me.theSelectedItem.IsPublished Then
-			Me.PublishItemButton.Text = "Update"
+			Me.PublishItemButton.Text = "更新"
 		Else
-			Me.PublishItemButton.Text = "Publish"
+			Me.PublishItemButton.Text = "发布"
 		End If
 	End Sub
 
@@ -1544,13 +1544,13 @@ Public Class PublishUserControl
 
 		If Me.theSteamAppInfo.CanUseContentFolderOrFile OrElse Me.theSteamAppInfo.UsesSteamUGC Then
 			If Me.theSteamAppInfo.ContentFileExtensionsAndDescriptions.Count > 0 Then
-				openFileWdw.Title = "Open the folder or the package file you want to upload"
+				openFileWdw.Title = "要上传的文件夹或文件"
 			Else
-				openFileWdw.Title = "Open the folder you want to upload"
+				openFileWdw.Title = "要上传的文件夹"
 			End If
-			openFileWdw.FileName = "[Folder Selection]"
+			openFileWdw.FileName = "[选择文件夹]"
 		Else
-			openFileWdw.Title = "Open the file you want to upload"
+			openFileWdw.Title = "要上传的文件"
 		End If
 		If File.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
 			openFileWdw.InitialDirectory = FileManager.GetPath(Me.theSelectedItem.ContentPathFolderOrFileName)
@@ -1599,7 +1599,7 @@ Public Class PublishUserControl
 	Private Sub BrowseForPreviewImage()
 		Dim openFileWdw As New OpenFileDialog()
 
-		openFileWdw.Title = "Open the image file you want to use for preview image"
+		openFileWdw.Title = "用于预览图的图像文件"
 		If File.Exists(Me.theSelectedItem.PreviewImagePathFileName) Then
 			openFileWdw.InitialDirectory = FileManager.GetPath(Me.theSelectedItem.PreviewImagePathFileName)
 		Else
@@ -1689,12 +1689,12 @@ Public Class PublishUserControl
 	Private Sub DeleteItem()
 		Dim deleteItemWindow As DeleteItemForm = New DeleteItemForm()
 		If Me.theSelectedItem.IsPublished Then
-			deleteItemWindow.TextBox1.Text = "Deleting will remove the item from the Workshop permanently." + vbCrLf + "Backup anything you want to save before deleting."
+			deleteItemWindow.TextBox1.Text = "删除操作将从创意工坊中永久移除该物品." + vbCrLf + "删除前备份任何你想要保留的内容."
 			If deleteItemWindow.ShowDialog() = DialogResult.OK Then
 				Me.DeletePublishedItemFromWorkshop()
 			End If
 		Else
-			deleteItemWindow.TextBox1.Text = "Deleting will remove the item from your saved items permanently." + vbCrLf + "Backup anything you want to save before deleting."
+			deleteItemWindow.TextBox1.Text = "删除操作将从你保存的列表永久移除该物品." + vbCrLf + "删除前备份任何你想要保留的内容."
 			If deleteItemWindow.ShowDialog() = DialogResult.OK Then
 				Me.UpdateAfterDeleteItem()
 			End If
@@ -1777,24 +1777,24 @@ Public Class PublishUserControl
 		If Me.theSelectedItem.ContentPathFolderOrFileNameIsChanged Then
 			If Me.theSteamAppInfo.CanUseContentFolderOrFile Then
 				If Not Directory.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) AndAlso Not File.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
-					Me.LogTextBox.AppendText("ERROR: Item content folder or file does not exist." + vbCrLf)
+					Me.LogTextBox.AppendText("错误: 物品内容文件夹或文件不存在." + vbCrLf)
 					prePublishChecksAreSuccessful = False
 				End If
 			ElseIf Me.theSteamAppInfo.UsesSteamUGC Then
 				If Not Directory.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
-					Me.LogTextBox.AppendText("ERROR: Item content folder does not exist." + vbCrLf)
+					Me.LogTextBox.AppendText("错误: 物品内容文件夹不存在." + vbCrLf)
 					prePublishChecksAreSuccessful = False
 				End If
 			Else
 				If Not File.Exists(Me.theSelectedItem.ContentPathFolderOrFileName) Then
-					Me.LogTextBox.AppendText("ERROR: Item content file does not exist." + vbCrLf)
+					Me.LogTextBox.AppendText("错误: 物品内容文件不存在." + vbCrLf)
 					prePublishChecksAreSuccessful = False
 				End If
 			End If
 		End If
 		If Me.theSelectedItem.PreviewImagePathFileNameIsChanged Then
 			If Not File.Exists(Me.theSelectedItem.PreviewImagePathFileName) Then
-				Me.LogTextBox.AppendText("ERROR: Item preview image file does not exist." + vbCrLf)
+				Me.LogTextBox.AppendText("错误: 物品预览图片文件不存在." + vbCrLf)
 				prePublishChecksAreSuccessful = False
 			End If
 		End If
@@ -1897,6 +1897,10 @@ Public Class PublishUserControl
 	Private theUnchangedSelectedTemplateItem As WorkshopItem
 
 	Private theBackgroundSteamPipe As BackgroundSteamPipe
+
+	Private Sub ItemVisibilityComboBox_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+	End Sub
 
 #End Region
 

@@ -50,13 +50,13 @@ Public Class PatchUserControl
 	Private Sub BrowseForMdlFileButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BrowseForMdlFileButton.Click
 		Dim openFileWdw As New OpenFileDialog()
 
-		openFileWdw.Title = "Open the MDL file you want to view"
+		openFileWdw.Title = "打开要查看的MDL文件"
 		openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(TheApp.Settings.PatchMdlPathFileName)
 		If openFileWdw.InitialDirectory = "" Then
 			openFileWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 		End If
 		openFileWdw.FileName = Path.GetFileName(TheApp.Settings.PatchMdlPathFileName)
-		openFileWdw.Filter = "Source Engine Model Files (*.mdl) | *.mdl"
+		openFileWdw.Filter = "源引擎模型文件 (*.mdl) | *.mdl"
 		openFileWdw.AddExtension = True
 		openFileWdw.Multiselect = False
 		openFileWdw.ValidateNames = True

@@ -30,7 +30,7 @@ Public Class UpdateUserControl
 		AddHandler Me.DownloadFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
 		AddHandler Me.UpdateFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
 
-		Me.CurrentVersionLabel.Text = "Current Version: " + My.Application.Info.Version.ToString(2)
+		Me.CurrentVersionLabel.Text = "当前版本: " + My.Application.Info.Version.ToString(2)
 	End Sub
 
 	' Do not need Free() because this widget is destroyed only on program exit.
@@ -50,7 +50,7 @@ Public Class UpdateUserControl
 #Region "Methods"
 
 	Public Sub CheckForUpdate()
-		Me.CheckForUpdateTextBox.Text = "Checking for update..."
+		Me.CheckForUpdateTextBox.Text = "检查更新..."
 		Me.UpdateCommandWidgets(True)
 		Me.CancelCheckButton.Enabled = True
 		Me.theUpdater.CheckForUpdate(AddressOf CheckForUpdate_ProgressChanged, AddressOf CheckForUpdate_RunWorkerCompleted)
@@ -165,7 +165,7 @@ Public Class UpdateUserControl
 
 	Private Sub CheckForUpdate_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
 		If e.Cancelled Then
-			Me.CheckForUpdateTextBox.Text = "Check canceled."
+			Me.CheckForUpdateTextBox.Text = "检查已取消."
 		Else
 			Dim outputInfo As Updater.StatusOutputInfo = Nothing
 			outputInfo = CType(e.Result, Updater.StatusOutputInfo)
@@ -173,10 +173,10 @@ Public Class UpdateUserControl
 			NotifyUpdateAvailable(outputInfo.UpdateIsAvailable)
 
 			If outputInfo.UpdateIsEnabled AndAlso Not outputInfo.UpdateIsAvailable Then
-				Me.theCurrentProgressBar.Text = "No available update."
+				Me.theCurrentProgressBar.Text = "无可用更新."
 				Me.theCurrentProgressBar.Value = 0
 			ElseIf outputInfo.DownloadIsEnabled AndAlso Not (outputInfo.UpdateIsEnabled AndAlso Not outputInfo.UpdateIsAvailable) Then
-				Me.theCurrentProgressBar.Text = "Starting download..."
+				Me.theCurrentProgressBar.Text = "开始下载..."
 				Me.theCurrentProgressBar.Value = 0
 			End If
 		End If
@@ -192,23 +192,23 @@ Public Class UpdateUserControl
 	Private Sub Download_DownloadFileCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
 		Dim pathFileName As String = CType(e.UserState, String)
 		If e.Cancelled Then
-			Me.theCurrentProgressBar.Text = "Download failed."
+			Me.theCurrentProgressBar.Text = "下载失败."
 			Me.theCurrentProgressBar.Value = 0
 
 			If File.Exists(pathFileName) Then
 				Try
 					File.Delete(pathFileName)
 				Catch ex As Exception
-					Me.theCurrentProgressBar.Text += "WARNING: Problem deleting incomplete downloaded file: """ + Path.GetFileName(pathFileName) + """"
+					Me.theCurrentProgressBar.Text += "警告: 删除不完整的下载文件时出现问题: """ + Path.GetFileName(pathFileName) + """"
 				End Try
 			End If
 		Else
 			If File.Exists(pathFileName) Then
-				Me.theCurrentProgressBar.Text = "Downloaded file: """ + Path.GetFileName(pathFileName) + """   " + Me.theCurrentProgressBar.Text
+				Me.theCurrentProgressBar.Text = "已下载文件: """ + Path.GetFileName(pathFileName) + """   " + Me.theCurrentProgressBar.Text
 				Me.GotoDownloadFileButton.Enabled = True
 				Me.theDownloadedPathFileName = pathFileName
 			Else
-				Me.theCurrentProgressBar.Text = "Download failed."
+				Me.theCurrentProgressBar.Text = "下载失败."
 			End If
 		End If
 
@@ -246,12 +246,12 @@ Public Class UpdateUserControl
 		'      does not show the path name bar nor does it scroll to the selected folder in the folder tree view.
 		Dim outputPathWdw As New OpenFileDialog()
 
-		outputPathWdw.Title = "Open the folder you want as Download Folder"
+		outputPathWdw.Title = "打开你想作为下载位置的文件夹"
 		outputPathWdw.InitialDirectory = FileManager.GetLongestExtantPath(TheApp.Settings.UpdateDownloadPath)
 		If outputPathWdw.InitialDirectory = "" Then
 			outputPathWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 		End If
-		outputPathWdw.FileName = "[Folder Selection]"
+		outputPathWdw.FileName = "[选择文件夹]"
 		outputPathWdw.AddExtension = False
 		outputPathWdw.CheckFileExists = False
 		outputPathWdw.Multiselect = False
@@ -267,7 +267,7 @@ Public Class UpdateUserControl
 
 	Private Sub Download()
 		If FileManager.PathExistsAfterTryToCreate(TheApp.Settings.UpdateDownloadPath) Then
-			Me.DownloadProgressBarEx.Text = "Checking for update..."
+			Me.DownloadProgressBarEx.Text = "检查更新..."
 			Me.DownloadProgressBarEx.Value = 0
 			Me.theCurrentProgressBar = Me.DownloadProgressBarEx
 
@@ -276,7 +276,7 @@ Public Class UpdateUserControl
 			Me.GotoDownloadFileButton.Enabled = False
 			Me.theUpdater.Download(AddressOf CheckForUpdate_ProgressChanged, AddressOf CheckForUpdate_RunWorkerCompleted, AddressOf Download_DownloadProgressChanged, AddressOf Download_DownloadFileCompleted, TheApp.Settings.UpdateDownloadPath)
 		Else
-			Me.DownloadProgressBarEx.Text = "Download failed to start because folder does not exist"
+			Me.DownloadProgressBarEx.Text = "下载失败 因为文件夹不存在"
 			Me.DownloadProgressBarEx.Value = 0
 		End If
 	End Sub
@@ -294,12 +294,12 @@ Public Class UpdateUserControl
 		'      does not show the path name bar nor does it scroll to the selected folder in the folder tree view.
 		Dim outputPathWdw As New OpenFileDialog()
 
-		outputPathWdw.Title = "Open the folder you want as Update Download Folder"
+		outputPathWdw.Title = "打开你想作为更新位置的文件夹"
 		outputPathWdw.InitialDirectory = FileManager.GetLongestExtantPath(TheApp.Settings.UpdateUpdateDownloadPath)
 		If outputPathWdw.InitialDirectory = "" Then
 			outputPathWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 		End If
-		outputPathWdw.FileName = "[Folder Selection]"
+		outputPathWdw.FileName = "[选择文件夹]"
 		outputPathWdw.AddExtension = False
 		outputPathWdw.CheckFileExists = False
 		outputPathWdw.Multiselect = False
@@ -315,7 +315,7 @@ Public Class UpdateUserControl
 
 	' Named UpdateApp to avoid confusion with existing UserControl.Update().
 	Private Sub UpdateApp()
-		Me.UpdateProgressBarEx.Text = "Checking for update..."
+		Me.UpdateProgressBarEx.Text = "检查更新..."
 		Me.UpdateProgressBarEx.Value = 0
 		Me.theCurrentProgressBar = Me.UpdateProgressBarEx
 

@@ -146,12 +146,12 @@ Public Class Viewer
                 Me.ViewData(info.mdlVersionOverride)
             ElseIf info.viewerAction = ViewerInfo.ViewerActionType.ViewModel Then
                 'Me.UpdateProgress(1, "Model viewer opening ...")
-                Me.UpdateProgress(1, "Model viewer opened.")
+                Me.UpdateProgress(1, "模型查看器已打开.")
                 Me.ViewModel()
                 'Me.UpdateProgress(1, "Model viewer opened.")
             ElseIf info.viewerAction = ViewerInfo.ViewerActionType.OpenViewer Then
                 'Me.UpdateProgress(1, "Model viewer opening ...")
-                Me.UpdateProgress(1, "Model viewer opened.")
+                Me.UpdateProgress(1, "模型查看器已打开.")
                 Me.OpenViewer()
                 'Me.UpdateProgress(1, "Model viewer opened.")
             End If
@@ -167,11 +167,11 @@ Public Class Viewer
         If viewerAction = ViewerInfo.ViewerActionType.GetData OrElse viewerAction = ViewerInfo.ViewerActionType.ViewModel Then
             If String.IsNullOrEmpty(Me.theInputMdlPathFileName) Then
                 Me.UpdateProgressStart("")
-                Me.WriteErrorMessage("MDL file is blank.")
+                Me.WriteErrorMessage("MDL文件是空的.")
                 inputsAreValid = False
             ElseIf Not File.Exists(Me.theInputMdlPathFileName) Then
                 Me.UpdateProgressStart("")
-                Me.WriteErrorMessage("MDL file does not exist.")
+                Me.WriteErrorMessage("MDL文件不存在.")
                 inputsAreValid = False
             End If
         End If
@@ -185,7 +185,7 @@ Public Class Viewer
 
             If Not File.Exists(modelViewerPathFileName) Then
                 inputsAreValid = False
-                Me.WriteErrorMessage("The model viewer, """ + modelViewerPathFileName + """, does not exist.")
+                Me.WriteErrorMessage("模型查看器 """ + modelViewerPathFileName + """ 不存在.")
                 Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
             End If
         End If
@@ -198,14 +198,14 @@ Public Class Viewer
 
     Private Sub ViewData(ByVal mdlVersionOverride As SupportedMdlVersion)
         Dim progressDescriptionText As String
-        progressDescriptionText = "Getting model data for "
+        progressDescriptionText = "正在获取模型数据 "
         progressDescriptionText += """" + Path.GetFileName(Me.theInputMdlPathFileName) + """"
 
         Me.UpdateProgressStart(progressDescriptionText + " ...")
 
         Me.ShowDataFromMdlFile(mdlVersionOverride)
 
-        Me.UpdateProgressStop("... " + progressDescriptionText + " finished.")
+        Me.UpdateProgressStop("... " + progressDescriptionText + " 完成.")
     End Sub
 
     Private Sub ShowDataFromMdlFile(ByVal mdlVersionOverride As SupportedMdlVersion)
@@ -222,11 +222,11 @@ Public Class Viewer
                         Me.UpdateProgress(1, aTextLine)
                     Next
                 Else
-                    Me.UpdateProgress(1, "ERROR: Model version not currently supported: " + CStr(version))
-                    Me.UpdateProgress(1, "       Try changing 'Override MDL version' option.")
+                    Me.UpdateProgress(1, "错误: 当前不支持该模型版本: " + CStr(version))
+                    Me.UpdateProgress(1, "       请尝试更改""覆盖MDL版本""选项.")
                 End If
             Else
-                Me.UpdateProgress(1, "ERROR: Model file not found: " + """" + Me.theInputMdlPathFileName + """")
+                Me.UpdateProgress(1, "错误: 未找到模型文件: " + """" + Me.theInputMdlPathFileName + """")
             End If
         Catch ex As Exception
             Me.WriteErrorMessage(ex.Message)
@@ -402,7 +402,7 @@ Public Class Viewer
                 End If
                 File.Copy(Me.theInputMdlPathFileName, replacementMdlPathFileName)
             Catch ex As Exception
-                Me.WriteErrorMessage("Crowbar tried to copy the file """ + Me.theInputMdlPathFileName + """ to """ + replacementMdlPathFileName + """ but Windows gave this message: " + ex.Message)
+                Me.WriteErrorMessage("Crowbar尝试将文件 """ + Me.theInputMdlPathFileName + """ 复制到 """ + replacementMdlPathFileName + """ 但Windows返回以下信息: " + ex.Message)
             End Try
 
             If File.Exists(replacementMdlPathFileName) Then
@@ -414,13 +414,13 @@ Public Class Viewer
                         model.WriteMdlFileNameToMdlFile(replacementMdlPathFileName, replacementMdlRelativePathFileName)
                         model.WriteAniFileNameToMdlFile(replacementMdlPathFileName, replacementMdlRelativePathFileName)
                     Else
-                        Me.WriteErrorMessage("Model version not currently supported: " + CStr(version))
+                        Me.WriteErrorMessage("当前不支持该模型版本: " + CStr(version))
                         Return ""
                     End If
                 Catch ex As FormatException
                     Me.WriteErrorMessage(ex.Message)
                 Catch ex As Exception
-                    Me.WriteErrorMessage("Crowbar tried to write to the temporary replacement MDL file but the system gave this message: " + ex.Message)
+                    Me.WriteErrorMessage("Crowbar尝试写入临时替换MDL文件 但系统返回以下信息: " + ex.Message)
                     Return ""
                 End Try
 
@@ -442,12 +442,12 @@ Public Class Viewer
                         End If
                         Me.theModelFilesForViewAsReplacement.Add(targetPathFileName)
                     Catch ex As Exception
-                        Me.WriteErrorMessage("Crowbar tried to copy the file """ + inputPathFileName + """ to """ + targetPathFileName + """ but Windows gave this message: " + ex.Message)
+                        Me.WriteErrorMessage("Crowbar尝试将文件 """ + inputPathFileName + """ 复制到 """ + targetPathFileName + """ 但Windows返回以下信息: " + ex.Message)
                     End Try
                 Next
             End If
         Else
-            Me.WriteErrorMessage("Crowbar tried to create """ + gameModelsTempPath + """, but it failed.")
+            Me.WriteErrorMessage("Crowbar尝试创建文件夹 """ + gameModelsTempPath + """ 失败.")
             replacementMdlRelativePathFileName = ""
         End If
 
@@ -565,7 +565,7 @@ Public Class Viewer
     End Sub
 
     Private Sub WriteErrorMessage(ByVal line As String)
-        Me.UpdateProgressInternal(1, "ERROR: " + line)
+        Me.UpdateProgressInternal(1, "错误: " + line)
     End Sub
 
     Private Sub UpdateProgress(ByVal indentLevel As Integer, ByVal line As String)

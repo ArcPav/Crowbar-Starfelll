@@ -18,6 +18,9 @@ Public Class MainForm
 		' This call is required by the designer.
 		InitializeComponent()
 
+		AddHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
+		ThemeManager.ApplyTheme(Me, TheApp.Settings.EnableDarkMode)
+
 		' Add any initialization after the InitializeComponent() call.
 		'Me.InitWidgets(Me)
 		'Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -32,6 +35,8 @@ Public Class MainForm
 			Me.Location = TheApp.Settings.WindowLocation
 			Me.Size = TheApp.Settings.WindowSize
 			Me.WindowState = TheApp.Settings.WindowState
+			
+			Me.ApplyGlobalFont(TheApp.Settings.AppFontName, TheApp.Settings.AppFontSize)
 
 			' Ensure minimum size of window. 
 			'     Usually MinimumSize Handles this, but MinimumSize changes when Windows Theme Message Box Font Is something weird Like "SimSun-ExtB" 8pt.
@@ -115,6 +120,7 @@ Public Class MainForm
 	End Sub
 
 	Private Sub Free()
+		RemoveHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
 		RemoveHandler Me.SetUpGamesUserControl1.GoBackButton.Click, AddressOf Me.SetUpGamesGoBackButton_Click
 		RemoveHandler Me.DownloadUserControl1.UseInUnpackButton.Click, AddressOf Me.DownloadUserControl1_UseInUnpackButton_Click
 		RemoveHandler Me.UnpackUserControl1.UseAllInDecompileButton.Click, AddressOf Me.UnpackUserControl_UseAllInDecompileButton_Click
@@ -313,15 +319,19 @@ Public Class MainForm
 
 	Private Sub UpdateUserControl1_UpdateAvailable(ByVal sender As System.Object, ByVal e As UpdateUserControl.UpdateAvailableEventArgs)
 		If e.UpdateIsAvailable Then
-			Me.UpdateTabPage.Text = "Update Available"
+			Me.UpdateTabPage.Text = "有更新"
 		Else
-			Me.UpdateTabPage.Text = "Update"
+			Me.UpdateTabPage.Text = "更新"
 		End If
 	End Sub
 
 #End Region
 
 #Region "Core Event Handlers"
+
+	Private Sub AppSettings_PropertyChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs)
+
+	End Sub
 
 #End Region
 
@@ -577,6 +587,27 @@ Public Class MainForm
 
 		Me.SetUpGamesUserControl1.GoBackButton.Enabled = True
 		Me.MainTabControl.SelectTab(Me.SetUpGamesTabPage)
+	End Sub
+
+	Public Sub ApplyGlobalFont(ByVal targetFontFamilyName As String, ByVal targetFontSize As Single)
+		Try
+			Dim baseFont As New Font(targetFontFamilyName, targetFontSize)
+			ApplyFontToControlTree(Me, baseFont)
+		Catch ex As Exception
+			' 如果找不到该字体 则使用系统默认
+		End Try
+	End Sub
+
+	Private Sub ApplyFontToControlTree(ByVal parentControl As Control, ByVal baseFont As Font)
+		If parentControl.Font IsNot Nothing Then
+			parentControl.Font = New Font(baseFont.FontFamily, baseFont.Size, parentControl.Font.Style)
+		Else
+			parentControl.Font = baseFont
+		End If
+
+		For Each childControl As Control In parentControl.Controls
+			ApplyFontToControlTree(childControl, baseFont)
+		Next
 	End Sub
 
 #End Region

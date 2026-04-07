@@ -116,8 +116,8 @@ Partial Class UnpackUserControl
 		Me.LogFileCheckBox.Name = "LogFileCheckBox"
 		Me.LogFileCheckBox.Size = New System.Drawing.Size(116, 17)
 		Me.LogFileCheckBox.TabIndex = 5
-		Me.LogFileCheckBox.Text = "Write log to a file"
-		Me.ToolTip1.SetToolTip(Me.LogFileCheckBox, "Write unpack log to a file.")
+		Me.LogFileCheckBox.Text = "输出日志文件"
+		Me.ToolTip1.SetToolTip(Me.LogFileCheckBox, "将解包日志写入文件.")
 		Me.LogFileCheckBox.UseVisualStyleBackColor = True
 		'
 		'Panel2
@@ -181,7 +181,7 @@ Partial Class UnpackUserControl
 		Me.GotoOutputPathButton.Name = "GotoOutputPathButton"
 		Me.GotoOutputPathButton.Size = New System.Drawing.Size(43, 23)
 		Me.GotoOutputPathButton.TabIndex = 18
-		Me.GotoOutputPathButton.Text = "Goto"
+		Me.GotoOutputPathButton.Text = "前往"
 		Me.GotoOutputPathButton.UseVisualStyleBackColor = True
 		'
 		'BrowseForOutputPathButton
@@ -192,7 +192,7 @@ Partial Class UnpackUserControl
 		Me.BrowseForOutputPathButton.Name = "BrowseForOutputPathButton"
 		Me.BrowseForOutputPathButton.Size = New System.Drawing.Size(64, 23)
 		Me.BrowseForOutputPathButton.TabIndex = 17
-		Me.BrowseForOutputPathButton.Text = "Browse..."
+		Me.BrowseForOutputPathButton.Text = "浏览..."
 		Me.BrowseForOutputPathButton.UseVisualStyleBackColor = True
 		'
 		'OutputPathTextBox
@@ -233,7 +233,7 @@ Partial Class UnpackUserControl
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(62, 13)
 		Me.Label2.TabIndex = 13
-		Me.Label2.Text = "Output to:"
+		Me.Label2.Text = "输出到:"
 		'
 		'UseDefaultOutputSubfolderButton
 		'
@@ -242,7 +242,7 @@ Partial Class UnpackUserControl
 		Me.UseDefaultOutputSubfolderButton.Name = "UseDefaultOutputSubfolderButton"
 		Me.UseDefaultOutputSubfolderButton.Size = New System.Drawing.Size(113, 23)
 		Me.UseDefaultOutputSubfolderButton.TabIndex = 19
-		Me.UseDefaultOutputSubfolderButton.Text = "Use Default"
+		Me.UseDefaultOutputSubfolderButton.Text = "重置选项"
 		Me.UseDefaultOutputSubfolderButton.UseVisualStyleBackColor = True
 		'
 		'PackagesLabel
@@ -252,7 +252,7 @@ Partial Class UnpackUserControl
 		Me.PackagesLabel.Name = "PackagesLabel"
 		Me.PackagesLabel.Size = New System.Drawing.Size(57, 13)
 		Me.PackagesLabel.TabIndex = 1
-		Me.PackagesLabel.Text = "Packages:"
+		Me.PackagesLabel.Text = "包装:"
 		'
 		'PackagePathFileNameTextBox
 		'
@@ -271,7 +271,7 @@ Partial Class UnpackUserControl
 		Me.BrowseForPackagePathFolderOrFileNameButton.Name = "BrowseForPackagePathFolderOrFileNameButton"
 		Me.BrowseForPackagePathFolderOrFileNameButton.Size = New System.Drawing.Size(64, 23)
 		Me.BrowseForPackagePathFolderOrFileNameButton.TabIndex = 3
-		Me.BrowseForPackagePathFolderOrFileNameButton.Text = "Browse..."
+		Me.BrowseForPackagePathFolderOrFileNameButton.Text = "浏览..."
 		Me.BrowseForPackagePathFolderOrFileNameButton.UseVisualStyleBackColor = True
 		'
 		'GotoPackageButton
@@ -281,7 +281,7 @@ Partial Class UnpackUserControl
 		Me.GotoPackageButton.Name = "GotoPackageButton"
 		Me.GotoPackageButton.Size = New System.Drawing.Size(43, 23)
 		Me.GotoPackageButton.TabIndex = 4
-		Me.GotoPackageButton.Text = "Goto"
+		Me.GotoPackageButton.Text = "前往"
 		Me.GotoPackageButton.UseVisualStyleBackColor = True
 		'
 		'Options_LogSplitContainer
@@ -336,7 +336,7 @@ Partial Class UnpackUserControl
 		Me.ContentsGroupBox.Size = New System.Drawing.Size(576, 347)
 		Me.ContentsGroupBox.TabIndex = 0
 		Me.ContentsGroupBox.TabStop = False
-		Me.ContentsGroupBox.Text = "Contents of package"
+		Me.ContentsGroupBox.Text = "包装内容"
 		'
 		'ContentsGroupBoxFillPanel
 		'
@@ -432,13 +432,13 @@ Partial Class UnpackUserControl
 		Me.ToolStrip1.Size = New System.Drawing.Size(570, 25)
 		Me.ToolStrip1.Stretch = True
 		Me.ToolStrip1.TabIndex = 10
-		Me.ToolStrip1.Text = "ToolStrip1"
+		Me.ToolStrip1.Text = "工具栏1"
 		'
 		'FindToolStripTextBox
 		'
 		Me.FindToolStripTextBox.Name = "FindToolStripTextBox"
 		Me.FindToolStripTextBox.Size = New System.Drawing.Size(435, 25)
-		Me.FindToolStripTextBox.ToolTipText = "Text to find"
+		Me.FindToolStripTextBox.ToolTipText = "查找文本"
 		'
 		'FindToolStripButton
 		'
@@ -448,8 +448,8 @@ Partial Class UnpackUserControl
 		Me.FindToolStripButton.Name = "FindToolStripButton"
 		Me.FindToolStripButton.RightToLeftAutoMirrorImage = True
 		Me.FindToolStripButton.Size = New System.Drawing.Size(23, 22)
-		Me.FindToolStripButton.Text = "Find"
-		Me.FindToolStripButton.ToolTipText = "Find"
+		Me.FindToolStripButton.Text = "查找"
+		Me.FindToolStripButton.ToolTipText = "查找"
 		'
 		'ToolStripSeparator1
 		'
@@ -461,7 +461,7 @@ Partial Class UnpackUserControl
 		Me.FilesSelectedCountToolStripLabel.Name = "FilesSelectedCountToolStripLabel"
 		Me.FilesSelectedCountToolStripLabel.Size = New System.Drawing.Size(24, 22)
 		Me.FilesSelectedCountToolStripLabel.Text = "0/0"
-		Me.FilesSelectedCountToolStripLabel.ToolTipText = "Selected item count / Total item count"
+		Me.FilesSelectedCountToolStripLabel.ToolTipText = "精选物品数量 / 总物品数量"
 		'
 		'ToolStripSeparator3
 		'
@@ -473,7 +473,7 @@ Partial Class UnpackUserControl
 		Me.SizeSelectedTotalToolStripLabel.Name = "SizeSelectedTotalToolStripLabel"
 		Me.SizeSelectedTotalToolStripLabel.Size = New System.Drawing.Size(13, 22)
 		Me.SizeSelectedTotalToolStripLabel.Text = "0"
-		Me.SizeSelectedTotalToolStripLabel.ToolTipText = "Byte count of selected items"
+		Me.SizeSelectedTotalToolStripLabel.ToolTipText = "所选物品的字节数"
 		'
 		'ToolStripSeparator2
 		'
@@ -487,7 +487,7 @@ Partial Class UnpackUserControl
 		Me.RefreshListingToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.RefreshListingToolStripButton.Name = "RefreshListingToolStripButton"
 		Me.RefreshListingToolStripButton.Size = New System.Drawing.Size(23, 22)
-		Me.RefreshListingToolStripButton.Text = "Refresh"
+		Me.RefreshListingToolStripButton.Text = "刷新"
 		'
 		'ContentsMinScrollerPanel
 		'
@@ -505,7 +505,7 @@ Partial Class UnpackUserControl
 		Me.OptionsGroupBox.Size = New System.Drawing.Size(188, 347)
 		Me.OptionsGroupBox.TabIndex = 0
 		Me.OptionsGroupBox.TabStop = False
-		Me.OptionsGroupBox.Text = "Options"
+		Me.OptionsGroupBox.Text = "选项"
 		'
 		'OptionsGroupBoxFillPanel
 		'
@@ -531,7 +531,7 @@ Partial Class UnpackUserControl
 		Me.KeepFullPathCheckBox.Name = "KeepFullPathCheckBox"
 		Me.KeepFullPathCheckBox.Size = New System.Drawing.Size(98, 17)
 		Me.KeepFullPathCheckBox.TabIndex = 13
-		Me.KeepFullPathCheckBox.Text = "Keep full path"
+		Me.KeepFullPathCheckBox.Text = "保持完整路径"
 		Me.KeepFullPathCheckBox.UseVisualStyleBackColor = True
 		'
 		'FolderForEachPackageCheckBox
@@ -541,7 +541,7 @@ Partial Class UnpackUserControl
 		Me.FolderForEachPackageCheckBox.Name = "FolderForEachPackageCheckBox"
 		Me.FolderForEachPackageCheckBox.Size = New System.Drawing.Size(150, 17)
 		Me.FolderForEachPackageCheckBox.TabIndex = 12
-		Me.FolderForEachPackageCheckBox.Text = "Folder for each package"
+		Me.FolderForEachPackageCheckBox.Text = "每个包的文件夹"
 		Me.FolderForEachPackageCheckBox.UseVisualStyleBackColor = True
 		'
 		'Label3
@@ -551,7 +551,7 @@ Partial Class UnpackUserControl
 		Me.Label3.Name = "Label3"
 		Me.Label3.Size = New System.Drawing.Size(155, 13)
 		Me.Label3.TabIndex = 0
-		Me.Label3.Text = "Game that has the unpacker:"
+		Me.Label3.Text = "使用哪个游戏的解包器:"
 		Me.Label3.Visible = False
 		'
 		'EditGameSetupButton
@@ -561,7 +561,7 @@ Partial Class UnpackUserControl
 		Me.EditGameSetupButton.Name = "EditGameSetupButton"
 		Me.EditGameSetupButton.Size = New System.Drawing.Size(90, 23)
 		Me.EditGameSetupButton.TabIndex = 1
-		Me.EditGameSetupButton.Text = "Set Up Games"
+		Me.EditGameSetupButton.Text = "游戏设置"
 		Me.EditGameSetupButton.UseVisualStyleBackColor = True
 		Me.EditGameSetupButton.Visible = False
 		'
@@ -584,7 +584,7 @@ Partial Class UnpackUserControl
 		Me.SelectAllModelsAndMaterialsFoldersCheckBox.Name = "SelectAllModelsAndMaterialsFoldersCheckBox"
 		Me.SelectAllModelsAndMaterialsFoldersCheckBox.Size = New System.Drawing.Size(238, 17)
 		Me.SelectAllModelsAndMaterialsFoldersCheckBox.TabIndex = 4
-		Me.SelectAllModelsAndMaterialsFoldersCheckBox.Text = "Select all ""models"" and ""materials"" folders"
+		Me.SelectAllModelsAndMaterialsFoldersCheckBox.Text = "选择所有 ""models"" 和 ""materials"" 文件夹"
 		Me.SelectAllModelsAndMaterialsFoldersCheckBox.UseVisualStyleBackColor = True
 		Me.SelectAllModelsAndMaterialsFoldersCheckBox.Visible = False
 		'
@@ -594,7 +594,7 @@ Partial Class UnpackUserControl
 		Me.UnpackOptionsUseDefaultsButton.Name = "UnpackOptionsUseDefaultsButton"
 		Me.UnpackOptionsUseDefaultsButton.Size = New System.Drawing.Size(90, 23)
 		Me.UnpackOptionsUseDefaultsButton.TabIndex = 6
-		Me.UnpackOptionsUseDefaultsButton.Text = "Use Defaults"
+		Me.UnpackOptionsUseDefaultsButton.Text = "重置选项"
 		Me.UnpackOptionsUseDefaultsButton.UseVisualStyleBackColor = True
 		Me.UnpackOptionsUseDefaultsButton.Visible = False
 		'
@@ -631,7 +631,7 @@ Partial Class UnpackUserControl
 		Me.UnpackButton.Name = "UnpackButton"
 		Me.UnpackButton.Size = New System.Drawing.Size(120, 23)
 		Me.UnpackButton.TabIndex = 2
-		Me.UnpackButton.Text = "Unpack"
+		Me.UnpackButton.Text = "解包"
 		Me.UnpackButton.UseVisualStyleBackColor = True
 		'
 		'SkipCurrentPackageButton
@@ -641,7 +641,7 @@ Partial Class UnpackUserControl
 		Me.SkipCurrentPackageButton.Name = "SkipCurrentPackageButton"
 		Me.SkipCurrentPackageButton.Size = New System.Drawing.Size(120, 23)
 		Me.SkipCurrentPackageButton.TabIndex = 3
-		Me.SkipCurrentPackageButton.Text = "Skip Current Package"
+		Me.SkipCurrentPackageButton.Text = "跳过当前包"
 		Me.SkipCurrentPackageButton.UseVisualStyleBackColor = True
 		'
 		'CancelUnpackButton
@@ -651,7 +651,7 @@ Partial Class UnpackUserControl
 		Me.CancelUnpackButton.Name = "CancelUnpackButton"
 		Me.CancelUnpackButton.Size = New System.Drawing.Size(120, 23)
 		Me.CancelUnpackButton.TabIndex = 4
-		Me.CancelUnpackButton.Text = "Cancel Unpack"
+		Me.CancelUnpackButton.Text = "取消解包"
 		Me.CancelUnpackButton.UseVisualStyleBackColor = True
 		'
 		'UseAllInDecompileButton
@@ -661,7 +661,7 @@ Partial Class UnpackUserControl
 		Me.UseAllInDecompileButton.Name = "UseAllInDecompileButton"
 		Me.UseAllInDecompileButton.Size = New System.Drawing.Size(120, 23)
 		Me.UseAllInDecompileButton.TabIndex = 5
-		Me.UseAllInDecompileButton.Text = "Use All in Decompile"
+		Me.UseAllInDecompileButton.Text = "全部转到反编译页"
 		Me.UseAllInDecompileButton.UseVisualStyleBackColor = True
 		'
 		'PostUnpackPanel
@@ -695,7 +695,7 @@ Partial Class UnpackUserControl
 		Me.UseInPreviewButton.Name = "UseInPreviewButton"
 		Me.UseInPreviewButton.Size = New System.Drawing.Size(91, 23)
 		Me.UseInPreviewButton.TabIndex = 2
-		Me.UseInPreviewButton.Text = "Use in Preview"
+		Me.UseInPreviewButton.Text = "转到预览页"
 		Me.UseInPreviewButton.UseVisualStyleBackColor = True
 		'
 		'UseInDecompileButton
@@ -706,7 +706,7 @@ Partial Class UnpackUserControl
 		Me.UseInDecompileButton.Name = "UseInDecompileButton"
 		Me.UseInDecompileButton.Size = New System.Drawing.Size(106, 23)
 		Me.UseInDecompileButton.TabIndex = 3
-		Me.UseInDecompileButton.Text = "Use in Decompile"
+		Me.UseInDecompileButton.Text = "转到反编译页"
 		Me.UseInDecompileButton.UseVisualStyleBackColor = True
 		'
 		'GotoUnpackedFileButton
@@ -716,7 +716,7 @@ Partial Class UnpackUserControl
 		Me.GotoUnpackedFileButton.Name = "GotoUnpackedFileButton"
 		Me.GotoUnpackedFileButton.Size = New System.Drawing.Size(43, 23)
 		Me.GotoUnpackedFileButton.TabIndex = 4
-		Me.GotoUnpackedFileButton.Text = "Goto"
+		Me.GotoUnpackedFileButton.Text = "前往"
 		Me.GotoUnpackedFileButton.UseVisualStyleBackColor = True
 		'
 		'UnpackUserControl

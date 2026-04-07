@@ -116,7 +116,7 @@ Public Class ViewUserControl
 	Private Sub BrowseForMdlFileButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BrowseForMdlFileButton.Click
 		Dim openFileWdw As New OpenFileDialog()
 
-		openFileWdw.Title = "Open the MDL file you want to view"
+		openFileWdw.Title = "打开要查看的MDL文件"
 		'openFileWdw.InitialDirectory = FileManager.GetPath(Me.AppSettingMdlPathFileName)
 		openFileWdw.InitialDirectory = FileManager.GetLongestExtantPath(Me.AppSettingMdlPathFileName)
 		If openFileWdw.InitialDirectory = "" Then

@@ -138,7 +138,11 @@ Public Class TreeViewEx
 						node.Tag = GetTag(item, leafItem, CType(node.Tag, TagType), False, False)
 					End If
 					If IsDimmed(item) Then
-						childNode.ForeColor = SystemColors.GrayText
+						If Me.BackColor.R < 100 Then
+							childNode.ForeColor = Color.Gray 
+						Else
+							childNode.ForeColor = SystemColors.GrayText
+						End If
 					Else
 						'FROM: https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.treenode.forecolor?view=netframework-4.0
 						' If null, the Color used is the ForeColor property value of the TreeView control that the tree node is assigned to.
@@ -179,12 +183,18 @@ Public Class TreeViewEx
 		e.DrawDefault = True
 		If (e.State And TreeNodeStates.Selected) = TreeNodeStates.Selected Then
 			If (e.State And TreeNodeStates.Focused) = TreeNodeStates.Focused Then
-				'e.Graphics.FillRectangle(Brushes.Red, e.Bounds)
-				'TextRenderer.DrawText(e.Graphics, e.Node.Text, e.Node.NodeFont, e.Bounds, e.Node.ForeColor, e.Node.BackColor, TextFormatFlags.GlyphOverhangPadding)
-				'e.DrawDefault = False
+
 			Else
-				e.Graphics.FillRectangle(SystemBrushes.ControlDark, e.Bounds)
-				TextRenderer.DrawText(e.Graphics, e.Node.Text, e.Node.NodeFont, e.Bounds, e.Node.ForeColor, e.Node.BackColor, TextFormatFlags.GlyphOverhangPadding)
+				Dim isDarkMode As Boolean = (Me.BackColor.R < 100)
+				Dim unfocusedSelectionColor As Color = If(isDarkMode, Color.FromArgb(62, 62, 66), SystemColors.ControlDark)
+
+				Using bgBrush As New SolidBrush(unfocusedSelectionColor)
+					e.Graphics.FillRectangle(bgBrush, e.Bounds)
+				End Using
+
+				Dim textColor As Color = If(e.Node.ForeColor = Color.Empty, Me.ForeColor, e.Node.ForeColor)
+				TextRenderer.DrawText(e.Graphics, e.Node.Text, e.Node.NodeFont, e.Bounds, textColor, TextFormatFlags.GlyphOverhangPadding)
+				
 				e.DrawDefault = False
 			End If
 		End If

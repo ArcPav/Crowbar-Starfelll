@@ -170,7 +170,7 @@ Public Class CompileUserControl
 	Private Sub BrowseForQcPathFolderOrFileNameButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BrowseForQcPathFolderOrFileNameButton.Click
 		Dim openFileWdw As New OpenFileDialog()
 
-		openFileWdw.Title = "Open the file or folder you want to compile"
+		openFileWdw.Title = "打开要编译的文件或文件夹"
 		If File.Exists(TheApp.Settings.CompileQcPathFileName) Then
 			openFileWdw.InitialDirectory = FileManager.GetPath(TheApp.Settings.CompileQcPathFileName)
 			'ElseIf Directory.Exists(TheApp.Settings.CompileQcPathFileName) Then
@@ -181,9 +181,9 @@ Public Class CompileUserControl
 				openFileWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			End If
 		End If
-		openFileWdw.FileName = "[Folder Selection]"
+		openFileWdw.FileName = "[选择文件夹]"
 		'openFileWdw.Filter = "Source Engine QC Files (*.qc)|*.qc|All Files (*.*)|*.*"
-		openFileWdw.Filter = "Source Engine QC Files (*.qc)|*.qc"
+		openFileWdw.Filter = "源引擎QC文件 (*.qc)|*.qc"
 		openFileWdw.AddExtension = True
 		openFileWdw.CheckFileExists = False
 		openFileWdw.Multiselect = False
@@ -194,7 +194,7 @@ Public Class CompileUserControl
 			' Allow dialog window to completely disappear.
 			Application.DoEvents()
 
-			If Path.GetFileName(openFileWdw.FileName) = "[Folder Selection].qc" Then
+			If Path.GetFileName(openFileWdw.FileName) = "[选择文件夹].qc" Then
 				TheApp.Settings.CompileQcPathFileName = FileManager.GetPath(openFileWdw.FileName)
 			Else
 				TheApp.Settings.CompileQcPathFileName = openFileWdw.FileName
@@ -251,7 +251,7 @@ Public Class CompileUserControl
 	'	Else
 	'		outputPathWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 	'	End If
-	'       outputPathWdw.FileName = "[Folder Selection]"
+	'       outputPathWdw.FileName = "[选择文件夹]"
 	'       outputPathWdw.AddExtension = False
 	'       outputPathWdw.CheckFileExists = False
 	'       outputPathWdw.Multiselect = False
@@ -532,7 +532,7 @@ Public Class CompileUserControl
 			'      does not show the path name bar nor does it scroll to the selected folder in the folder tree view.
 			Dim outputPathWdw As New OpenFileDialog()
 
-			outputPathWdw.Title = "Open the folder you want as Output Folder"
+			outputPathWdw.Title = "打开输出文件夹"
 			'If Directory.Exists(TheApp.Settings.CompileOutputFullPath) Then
 			'	outputPathWdw.InitialDirectory = TheApp.Settings.CompileOutputFullPath
 			'Else
@@ -547,7 +547,7 @@ Public Class CompileUserControl
 				End If
 			End If
 			'End If
-			outputPathWdw.FileName = "[Folder Selection]"
+			outputPathWdw.FileName = "[选择文件夹]"
 			outputPathWdw.AddExtension = False
 			outputPathWdw.CheckFileExists = False
 			outputPathWdw.Multiselect = False
@@ -594,9 +594,9 @@ Public Class CompileUserControl
 		Dim gameSetup As GameSetup
 		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
 		If Me.CompilerOptionDefineBonesCheckBox.Checked AndAlso gameSetup.GameEngine = GameEngine.Source Then
-			Me.CompileButton.Text = "&Compile DefineBones"
+			Me.CompileButton.Text = "&编译 定义骨骼"
 		Else
-			Me.CompileButton.Text = "&Compile"
+			Me.CompileButton.Text = "&编译"
 		End If
 	End Sub
 

@@ -47,45 +47,66 @@ Public Class ProgressBarEx
 	Protected Overrides Sub OnPaint(e As PaintEventArgs)
 		Dim g As Graphics = e.Graphics
 		Dim range As Integer = Maximum - Minimum
-		Dim percent As Double = CDbl(Value - Minimum) / CDbl(range)
+		Dim percent As Double = If(range > 0, CDbl(Value - Minimum) / CDbl(range), 0)
 		Dim rect As Rectangle = Me.ClientRectangle
 		Dim bounds As Rectangle = e.ClipRectangle
-		If rect.Width > 0 AndAlso percent > 0 Then
-			If ProgressBarRenderer.IsSupported Then
-				ProgressBarRenderer.DrawHorizontalBar(g, Me.DisplayRectangle)
-				rect.Inflate(-2, -2)
-				rect.Width = CInt(rect.Width * percent)
-				If rect.Width = 0 Then
-					rect.Width = 1
-				End If
-				'NOTE: This always draws with Green color, so use other code to draw with widget's colors.
-				'ProgressBarRenderer.DrawHorizontalChunks(e.Graphics, rect)
-				Dim gradientBrush As LinearGradientBrush = New LinearGradientBrush(rect, BackColor, ForeColor, LinearGradientMode.Vertical)
-				e.Graphics.FillRectangle(gradientBrush, rect)
-			Else
-				Dim barWidth As Double = percent * bounds.Width
-				Using backBrush As New SolidBrush(BackColor)
-					g.FillRectangle(backBrush, bounds)
+
+		Dim isDarkMode As Boolean = (Me.BackColor.R < 100)
+
+		If isDarkMode Then
+
+			Using backBrush As New SolidBrush(Me.BackColor)
+				g.FillRectangle(backBrush, rect)
+			End Using
+
+			If rect.Width > 0 AndAlso percent > 0 Then
+				Dim chunkRect As Rectangle = rect
+				chunkRect.Inflate(-1, -1)
+				chunkRect.Width = CInt(Math.Max(1, chunkRect.Width * percent))
+				
+				Using progressBrush As New SolidBrush(Color.FromArgb(0, 120, 215))
+					g.FillRectangle(progressBrush, chunkRect)
 				End Using
-				Using foreBrush As New SolidBrush(ForeColor)
-					g.FillRectangle(foreBrush, New RectangleF(0, 0, CSng(barWidth), bounds.Height))
-				End Using
-				ControlPaint.DrawBorder(g, bounds, Color.Black, ButtonBorderStyle.Solid)
 			End If
+
+			Using borderPen As New Pen(Color.FromArgb(85, 85, 85))
+				g.DrawRectangle(borderPen, 0, 0, rect.Width - 1, rect.Height - 1)
+			End Using
+
 		Else
-			If ProgressBarRenderer.IsSupported Then
-				ProgressBarRenderer.DrawHorizontalBar(g, Me.DisplayRectangle)
+			If rect.Width > 0 AndAlso percent > 0 Then
+				If ProgressBarRenderer.IsSupported Then
+					ProgressBarRenderer.DrawHorizontalBar(g, Me.DisplayRectangle)
+					Dim chunkRect As Rectangle = rect
+					chunkRect.Inflate(-2, -2)
+					chunkRect.Width = CInt(Math.Max(1, chunkRect.Width * percent))
+					
+					Using gradientBrush As New LinearGradientBrush(chunkRect, BackColor, ForeColor, LinearGradientMode.Vertical)
+						g.FillRectangle(gradientBrush, chunkRect)
+					End Using
+				Else
+					Dim barWidth As Double = percent * bounds.Width
+					Using backBrush As New SolidBrush(BackColor)
+						g.FillRectangle(backBrush, bounds)
+					End Using
+					Using foreBrush As New SolidBrush(ForeColor)
+						g.FillRectangle(foreBrush, New RectangleF(0, 0, CSng(barWidth), bounds.Height))
+					End Using
+					ControlPaint.DrawBorder(g, bounds, Color.Black, ButtonBorderStyle.Solid)
+				End If
 			Else
-				ControlPaint.DrawBorder(g, bounds, Color.Black, ButtonBorderStyle.Solid)
+				If ProgressBarRenderer.IsSupported Then
+					ProgressBarRenderer.DrawHorizontalBar(g, Me.DisplayRectangle)
+				Else
+					ControlPaint.DrawBorder(g, bounds, Color.Black, ButtonBorderStyle.Solid)
+				End If
 			End If
 		End If
 
 		If Me.theText <> "" Then
-			Dim x As Double
-			Dim y As Double
-			x = Me.Width * 0.5 - (g.MeasureString(Me.theText, Me.Font).Width * 0.5)
-			y = Me.Height * 0.5 - (g.MeasureString(Me.theText, Me.Font).Height * 0.5)
-			TextRenderer.DrawText(g, Me.theText, Me.Font, New Point(CInt(x), CInt(y)), Me.ForeColor, Me.BackColor)
+			Dim x As Double = Me.Width * 0.5 - (g.MeasureString(Me.theText, Me.Font).Width * 0.5)
+			Dim y As Double = Me.Height * 0.5 - (g.MeasureString(Me.theText, Me.Font).Height * 0.5)
+			TextRenderer.DrawText(g, Me.theText, Me.Font, New Point(CInt(x), CInt(y)), Me.ForeColor)
 		End If
 
 	End Sub

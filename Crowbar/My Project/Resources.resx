@@ -128,14 +128,14 @@
     <value>..\resources\crowbar_icon_large.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="About_ProductDescription" xml:space="preserve">
-    <value>GoldSource and Source Engine Modding Toolset:
-* Decompiler of MDL and related files.
-* Compiler interface to StudioMDL.exe tool.
-* Model viewer interface to Half-Life Model Viewer tool.
-* Unpacker of Fairy Tale Busters APK, Tactical Intervention FPX, Garry's Mod GMA, Vampire: The Masquerade - Bloodlines VPK files, and Source-engine VPK files.
-* Packer interface to Garry's Mod GMA and Source-engine VPK packer tools.
-* Downloader of Workshop items from any Steam game that allows public downloads.
-* Publisher of Workshop items for several Source-engine games.</value>
+    <value>GoldSource和Source引擎模组工具集:
+* MDL及相关文件的反编译器
+* StudioMDL.exe工具的编译器界面
+* Half-Life模型查看器 (Half-Life Model Viewer) 工具的模型预览界面
+* 支持解包Fairy Tale Busters APK、Tactical Intervention FPX、Garry's Mod GMA、The Masquerade - Bloodlines VPK文件以及Source引擎VPK文件
+* Garry's Mod GMA和Source引擎VPK打包工具的打包界面
+* 可从任何允许公开下载的Steam游戏中下载创意工坊(Workshop)物品
+* 为多款Source引擎游戏发布创意工坊物品.</value>
   </data>
   <data name="Decompile_DebugAniFileNameSuffix" xml:space="preserve">
     <value>decompile-ANI.txt</value>
@@ -189,10 +189,10 @@
     <value>..\resources\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="About_GotoSteamGroupText" xml:space="preserve">
-    <value>Goto Steam Group</value>
+    <value>前往Steam群组</value>
   </data>
   <data name="About_GotoSteamProfileText" xml:space="preserve">
-    <value>Goto Steam Profile</value>
+    <value>前往Steam主页</value>
   </data>
   <data name="CrowbarGuideBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\CrowbarGuideBanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -57,40 +57,19 @@ Public Class TextBoxEx
 		MyBase.OnPaint(e)
 
 		If Me.theCueBannerText <> "" AndAlso Me.Text = "" AndAlso Me.theOriginalFont IsNot Nothing Then
-			'Using sb As New SolidBrush(SystemColors.Control)
-			'	e.Graphics.FillRectangle(sb, Me.ClientRectangle)
-			'	sb.Dispose()
-			'End Using
-
-			'Dim drawFont As System.Drawing.Font = New System.Drawing.Font(Me.theOriginalFont.FontFamily, Me.theOriginalFont.Size, Me.theOriginalFont.Style, Me.theOriginalFont.Unit)
 			Dim drawFont As System.Drawing.Font = New System.Drawing.Font(Me.theOriginalFont.FontFamily, Me.theOriginalFont.Size, FontStyle.Italic, Me.theOriginalFont.Unit)
 
+			Dim drawBackColor As Color = Me.BackColor 
 			Dim drawForeColor As Color = SystemColors.GrayText
-			Dim drawBackColor As Color = SystemColors.Control
+			If drawBackColor.R < 100 Then
+				drawForeColor = Color.Gray
+			End If
+			
 			If drawForeColor = drawBackColor Then
 				drawForeColor = Me.ForeColor
-				drawBackColor = Me.BackColor
 			End If
+			
 			TextRenderer.DrawText(e.Graphics, Me.theCueBannerText, drawFont, New Point(1, 0), drawForeColor, drawBackColor)
-			'======
-			'' Draw higlight.
-			'Dim higlightForeColor As Color = SystemColors.ControlLightLight
-			''Dim higlightBackColor As Color = SystemColors.Control
-			''If higlightForeColor = higlightBackColor Then
-			''	higlightForeColor = Me.ForeColor
-			''	higlightBackColor = Me.BackColor
-			''End If
-			''TextRenderer.DrawText(e.Graphics, Me.theCueBannerText, drawFont, New Point(1, 1), higlightForeColor, higlightBackColor)
-			'TextRenderer.DrawText(e.Graphics, Me.theCueBannerText, drawFont, New Point(1, 1), higlightForeColor)
-			'' Draw shadow.
-			'Dim shadowForeColor As Color = SystemColors.ControlDark
-			''Dim shadowBackColor As Color = SystemColors.Control
-			''If shadowForeColor = shadowBackColor Then
-			''	shadowForeColor = Me.ForeColor
-			''	shadowBackColor = Me.BackColor
-			''End If
-			''TextRenderer.DrawText(e.Graphics, Me.theCueBannerText, drawFont, New Point(-1, -1), shadowForeColor, shadowBackColor)
-			'TextRenderer.DrawText(e.Graphics, Me.theCueBannerText, drawFont, New Point(-1, -1), shadowForeColor)
 		End If
 	End Sub
 

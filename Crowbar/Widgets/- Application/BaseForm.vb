@@ -48,4 +48,14 @@
 	'	MyBase.OnResizeEnd(e)
 	'End Sub
 
+	Protected Overrides Sub OnLoad(e As EventArgs)
+		MyBase.OnLoad(e)
+		Try
+			If Not DesignMode Then
+				ThemeManager.ApplyTheme(Me, TheApp.Settings.EnableDarkMode)
+			End If
+		Catch ex As Exception
+		End Try
+	End Sub
+
 End Class

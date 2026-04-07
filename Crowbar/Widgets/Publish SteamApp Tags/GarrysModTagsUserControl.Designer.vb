@@ -56,7 +56,7 @@ Partial Class GarrysModTagsUserControl
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(33, 13)
 		Me.Label1.TabIndex = 0
-		Me.Label1.Text = "Type:"
+		Me.Label1.Text = "类型:"
 		'
 		'CheckBox1
 		'
@@ -67,7 +67,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox1.Size = New System.Drawing.Size(52, 17)
 		Me.CheckBox1.TabIndex = 0
 		Me.CheckBox1.Tag = "Build"
-		Me.CheckBox1.Text = "Build"
+		Me.CheckBox1.Text = "构建"
 		Me.CheckBox1.UseVisualStyleBackColor = True
 		'
 		'CheckBox2
@@ -79,7 +79,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox2.Size = New System.Drawing.Size(68, 17)
 		Me.CheckBox2.TabIndex = 1
 		Me.CheckBox2.Tag = "Cartoon"
-		Me.CheckBox2.Text = "Cartoon"
+		Me.CheckBox2.Text = "卡通"
 		Me.CheckBox2.UseVisualStyleBackColor = True
 		'
 		'CheckBox3
@@ -91,7 +91,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox3.Size = New System.Drawing.Size(57, 17)
 		Me.CheckBox3.TabIndex = 2
 		Me.CheckBox3.Tag = "Comic"
-		Me.CheckBox3.Text = "Comic"
+		Me.CheckBox3.Text = "漫画"
 		Me.CheckBox3.UseVisualStyleBackColor = True
 		'
 		'CheckBox4
@@ -103,7 +103,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox4.Size = New System.Drawing.Size(46, 17)
 		Me.CheckBox4.TabIndex = 3
 		Me.CheckBox4.Tag = "Fun"
-		Me.CheckBox4.Text = "Fun"
+		Me.CheckBox4.Text = "有趣"
 		Me.CheckBox4.UseVisualStyleBackColor = True
 		'
 		'CheckBox5
@@ -115,7 +115,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox5.Size = New System.Drawing.Size(57, 17)
 		Me.CheckBox5.TabIndex = 4
 		Me.CheckBox5.Tag = "Movie"
-		Me.CheckBox5.Text = "Movie"
+		Me.CheckBox5.Text = "电影"
 		Me.CheckBox5.UseVisualStyleBackColor = True
 		'
 		'CheckBox6
@@ -127,7 +127,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox6.Size = New System.Drawing.Size(65, 17)
 		Me.CheckBox6.TabIndex = 5
 		Me.CheckBox6.Tag = "Realism"
-		Me.CheckBox6.Text = "Realism"
+		Me.CheckBox6.Text = "现实主义"
 		Me.CheckBox6.UseVisualStyleBackColor = True
 		'
 		'CheckBox7
@@ -139,7 +139,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox7.Size = New System.Drawing.Size(70, 17)
 		Me.CheckBox7.TabIndex = 6
 		Me.CheckBox7.Tag = "Roleplay"
-		Me.CheckBox7.Text = "Roleplay"
+		Me.CheckBox7.Text = "角色扮演"
 		Me.CheckBox7.UseVisualStyleBackColor = True
 		'
 		'CheckBox8
@@ -151,7 +151,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox8.Size = New System.Drawing.Size(58, 17)
 		Me.CheckBox8.TabIndex = 7
 		Me.CheckBox8.Tag = "Scenic"
-		Me.CheckBox8.Text = "Scenic"
+		Me.CheckBox8.Text = "风景"
 		Me.CheckBox8.UseVisualStyleBackColor = True
 		'
 		'CheckBox9
@@ -163,7 +163,7 @@ Partial Class GarrysModTagsUserControl
 		Me.CheckBox9.Size = New System.Drawing.Size(57, 17)
 		Me.CheckBox9.TabIndex = 8
 		Me.CheckBox9.Tag = "Water"
-		Me.CheckBox9.Text = "Water"
+		Me.CheckBox9.Text = "水"
 		Me.CheckBox9.UseVisualStyleBackColor = True
 		'
 		'GroupBox1
@@ -184,7 +184,7 @@ Partial Class GarrysModTagsUserControl
 		Me.GroupBox1.Size = New System.Drawing.Size(151, 228)
 		Me.GroupBox1.TabIndex = 2
 		Me.GroupBox1.TabStop = False
-		Me.GroupBox1.Text = "Choose up to two"
+		Me.GroupBox1.Text = "最多选择两个"
 		'
 		'AddonTagCheckBox
 		'
@@ -196,7 +196,7 @@ Partial Class GarrysModTagsUserControl
 		Me.AddonTagCheckBox.Size = New System.Drawing.Size(61, 17)
 		Me.AddonTagCheckBox.TabIndex = 9
 		Me.AddonTagCheckBox.Tag = "Addon"
-		Me.AddonTagCheckBox.Text = "Addon"
+		Me.AddonTagCheckBox.Text = "附加内容"
 		Me.AddonTagCheckBox.UseVisualStyleBackColor = True
 		'
 		'Label2
@@ -206,7 +206,7 @@ Partial Class GarrysModTagsUserControl
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(63, 13)
 		Me.Label2.TabIndex = 10
-		Me.Label2.Text = "Always set:"
+		Me.Label2.Text = "始终设置:"
 		'
 		'GarrysModTagsUserControl
 		'

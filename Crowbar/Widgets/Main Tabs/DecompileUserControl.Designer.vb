@@ -98,87 +98,84 @@ Partial Class DecompileUserControl
         'DebugInfoCheckBox
         '
         Me.DebugInfoCheckBox.AutoSize = True
-        Me.DebugInfoCheckBox.Location = New System.Drawing.Point(4, 145)
-        Me.DebugInfoCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DebugInfoCheckBox.Location = New System.Drawing.Point(4, 127)
+        Me.DebugInfoCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.DebugInfoCheckBox.Name = "DebugInfoCheckBox"
-        Me.DebugInfoCheckBox.Size = New System.Drawing.Size(213, 20)
+        Me.DebugInfoCheckBox.Size = New System.Drawing.Size(136, 18)
         Me.DebugInfoCheckBox.TabIndex = 14
-        Me.DebugInfoCheckBox.Text = "Decompile-info comments and files"
-        Me.ToolTip1.SetToolTip(Me.DebugInfoCheckBox, "Write comments and extra files that include decompile info useful in debugging.")
+        Me.DebugInfoCheckBox.Text = "反编译信息注释和文件"
+        Me.ToolTip1.SetToolTip(Me.DebugInfoCheckBox, "编写注释和额外文件 其中包含对调试有用的反编译信息.")
         Me.DebugInfoCheckBox.UseVisualStyleBackColor = True
         '
         'LogFileCheckBox
         '
         Me.LogFileCheckBox.AutoSize = True
-        Me.LogFileCheckBox.Location = New System.Drawing.Point(4, 117)
-        Me.LogFileCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LogFileCheckBox.Location = New System.Drawing.Point(4, 102)
+        Me.LogFileCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.LogFileCheckBox.Name = "LogFileCheckBox"
-        Me.LogFileCheckBox.Size = New System.Drawing.Size(116, 20)
+        Me.LogFileCheckBox.Size = New System.Drawing.Size(103, 18)
         Me.LogFileCheckBox.TabIndex = 13
-        Me.LogFileCheckBox.Text = "Write log to a file"
-        Me.ToolTip1.SetToolTip(Me.LogFileCheckBox, "Write the decompile log to a file.")
+        Me.LogFileCheckBox.Text = "输出反编译日志"
+        Me.ToolTip1.SetToolTip(Me.LogFileCheckBox, "将反编译日志写入文件.")
         Me.LogFileCheckBox.UseVisualStyleBackColor = True
         '
         'DeclareSequenceQciCheckBox
         '
         Me.DeclareSequenceQciCheckBox.AutoSize = True
-        Me.DeclareSequenceQciCheckBox.Location = New System.Drawing.Point(4, 202)
-        Me.DeclareSequenceQciCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DeclareSequenceQciCheckBox.Location = New System.Drawing.Point(4, 177)
+        Me.DeclareSequenceQciCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.DeclareSequenceQciCheckBox.Name = "DeclareSequenceQciCheckBox"
-        Me.DeclareSequenceQciCheckBox.Size = New System.Drawing.Size(163, 20)
+        Me.DeclareSequenceQciCheckBox.Size = New System.Drawing.Size(162, 18)
         Me.DeclareSequenceQciCheckBox.TabIndex = 40
         Me.DeclareSequenceQciCheckBox.Text = "$DeclareSequence QCI file"
-        Me.ToolTip1.SetToolTip(Me.DeclareSequenceQciCheckBox, "Write a QCI file with a $DeclareSequence line for each sequence in the MDL file. " &
-        "Useful for getting sequences in correct order for multiplayer.")
+        Me.ToolTip1.SetToolTip(Me.DeclareSequenceQciCheckBox, "在MDL文件中为每个序列写一个带$DeclareSequence行的QCI文件. 有助于多人游戏下有正确的序列播放顺序.")
         Me.DeclareSequenceQciCheckBox.UseVisualStyleBackColor = True
         '
         'FormatForStricterImportersCheckBox
         '
         Me.FormatForStricterImportersCheckBox.AutoSize = True
-        Me.FormatForStricterImportersCheckBox.Location = New System.Drawing.Point(4, 60)
-        Me.FormatForStricterImportersCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FormatForStricterImportersCheckBox.Location = New System.Drawing.Point(4, 52)
+        Me.FormatForStricterImportersCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.FormatForStricterImportersCheckBox.Name = "FormatForStricterImportersCheckBox"
-        Me.FormatForStricterImportersCheckBox.Size = New System.Drawing.Size(173, 20)
+        Me.FormatForStricterImportersCheckBox.Size = New System.Drawing.Size(92, 18)
         Me.FormatForStricterImportersCheckBox.TabIndex = 12
-        Me.FormatForStricterImportersCheckBox.Text = "Format for stricter importers"
-        Me.ToolTip1.SetToolTip(Me.FormatForStricterImportersCheckBox, "Write decompiled files in a format that some importers expect, but is not as easy" &
-        " to read.")
+        Me.FormatForStricterImportersCheckBox.Text = "更严格的格式"
+        Me.ToolTip1.SetToolTip(Me.FormatForStricterImportersCheckBox, "以一些导入者预期但不那么容易的格式写入反编译文件 去阅读.")
         Me.FormatForStricterImportersCheckBox.UseVisualStyleBackColor = True
         '
         'UseMixedCaseForKeywordsCheckBox
         '
         Me.UseMixedCaseForKeywordsCheckBox.AutoSize = True
-        Me.UseMixedCaseForKeywordsCheckBox.Location = New System.Drawing.Point(23, 117)
-        Me.UseMixedCaseForKeywordsCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UseMixedCaseForKeywordsCheckBox.Location = New System.Drawing.Point(23, 102)
+        Me.UseMixedCaseForKeywordsCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.UseMixedCaseForKeywordsCheckBox.Name = "UseMixedCaseForKeywordsCheckBox"
-        Me.UseMixedCaseForKeywordsCheckBox.Size = New System.Drawing.Size(223, 20)
+        Me.UseMixedCaseForKeywordsCheckBox.Size = New System.Drawing.Size(171, 18)
         Me.UseMixedCaseForKeywordsCheckBox.TabIndex = 42
-        Me.UseMixedCaseForKeywordsCheckBox.Text = "Use MixedCase for keywords (Source)"
-        Me.ToolTip1.SetToolTip(Me.UseMixedCaseForKeywordsCheckBox, "$CommandLikeThis instead of $commandlikethis")
+        Me.UseMixedCaseForKeywordsCheckBox.Text = "关键词使用混合小写 (Source)"
+        Me.ToolTip1.SetToolTip(Me.UseMixedCaseForKeywordsCheckBox, "$CommandLikeThis 代替 $commandlikethis")
         Me.UseMixedCaseForKeywordsCheckBox.UseVisualStyleBackColor = True
         '
         'RemovePathFromMaterialFileNamesCheckBox
         '
         Me.RemovePathFromMaterialFileNamesCheckBox.AutoSize = True
-        Me.RemovePathFromMaterialFileNamesCheckBox.Location = New System.Drawing.Point(23, 174)
-        Me.RemovePathFromMaterialFileNamesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RemovePathFromMaterialFileNamesCheckBox.Location = New System.Drawing.Point(23, 152)
+        Me.RemovePathFromMaterialFileNamesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.RemovePathFromMaterialFileNamesCheckBox.Name = "RemovePathFromMaterialFileNamesCheckBox"
-        Me.RemovePathFromMaterialFileNamesCheckBox.Size = New System.Drawing.Size(224, 20)
+        Me.RemovePathFromMaterialFileNamesCheckBox.Size = New System.Drawing.Size(147, 18)
         Me.RemovePathFromMaterialFileNamesCheckBox.TabIndex = 41
-        Me.RemovePathFromMaterialFileNamesCheckBox.Text = "Remove path from material file names"
-        Me.ToolTip1.SetToolTip(Me.RemovePathFromMaterialFileNamesCheckBox, "Write only the file name in the SMD, even if a path was stored. This might cause " &
-        "problem with $CDMaterials in QC file.")
+        Me.RemovePathFromMaterialFileNamesCheckBox.Text = "从材质文件名中删除路径"
+        Me.ToolTip1.SetToolTip(Me.RemovePathFromMaterialFileNamesCheckBox, "即使存储了路径 也只在SMD写入文件名. 这可能会导致 QC文件中$CDMaterials问题.")
         Me.RemovePathFromMaterialFileNamesCheckBox.UseVisualStyleBackColor = True
         '
         'UseNonValveUvConversionCheckBox
         '
         Me.UseNonValveUvConversionCheckBox.AutoSize = True
-        Me.UseNonValveUvConversionCheckBox.Location = New System.Drawing.Point(23, 202)
-        Me.UseNonValveUvConversionCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UseNonValveUvConversionCheckBox.Location = New System.Drawing.Point(23, 177)
+        Me.UseNonValveUvConversionCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.UseNonValveUvConversionCheckBox.Name = "UseNonValveUvConversionCheckBox"
-        Me.UseNonValveUvConversionCheckBox.Size = New System.Drawing.Size(253, 20)
+        Me.UseNonValveUvConversionCheckBox.Size = New System.Drawing.Size(198, 18)
         Me.UseNonValveUvConversionCheckBox.TabIndex = 44
-        Me.UseNonValveUvConversionCheckBox.Text = "Use non-Valve UV conversion (GoldSource)"
+        Me.UseNonValveUvConversionCheckBox.Text = "使用非Valve UV转换 (GoldSource)"
         Me.ToolTip1.SetToolTip(Me.UseNonValveUvConversionCheckBox, "[ u=s/width ] and [ v=1-(t/height) ] instead of Valve's [ u=s/(width-1) ] and [ v" &
         "=1-(t/(height-1)) ]")
         Me.UseNonValveUvConversionCheckBox.UseVisualStyleBackColor = True
@@ -186,35 +183,35 @@ Partial Class DecompileUserControl
         'OverrideMdlVersionLabel
         '
         Me.OverrideMdlVersionLabel.AutoSize = True
-        Me.OverrideMdlVersionLabel.Location = New System.Drawing.Point(4, 249)
+        Me.OverrideMdlVersionLabel.Location = New System.Drawing.Point(4, 218)
         Me.OverrideMdlVersionLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.OverrideMdlVersionLabel.Name = "OverrideMdlVersionLabel"
-        Me.OverrideMdlVersionLabel.Size = New System.Drawing.Size(124, 16)
+        Me.OverrideMdlVersionLabel.Size = New System.Drawing.Size(78, 14)
         Me.OverrideMdlVersionLabel.TabIndex = 46
-        Me.OverrideMdlVersionLabel.Text = "Override MDL version:"
-        Me.ToolTip1.SetToolTip(Me.OverrideMdlVersionLabel, "Decompile based on this selected version instead of what is stored in MDL file.")
+        Me.OverrideMdlVersionLabel.Text = "覆盖MDL版本:"
+        Me.ToolTip1.SetToolTip(Me.OverrideMdlVersionLabel, "根据所选版本反编译 而非根据MDL文件头来判断.")
         '
         'OverrideMdlVersionComboBox
         '
         Me.OverrideMdlVersionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.OverrideMdlVersionComboBox.FormattingEnabled = True
-        Me.OverrideMdlVersionComboBox.Location = New System.Drawing.Point(144, 245)
-        Me.OverrideMdlVersionComboBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OverrideMdlVersionComboBox.Location = New System.Drawing.Point(144, 214)
+        Me.OverrideMdlVersionComboBox.Margin = New System.Windows.Forms.Padding(4)
         Me.OverrideMdlVersionComboBox.Name = "OverrideMdlVersionComboBox"
-        Me.OverrideMdlVersionComboBox.Size = New System.Drawing.Size(128, 24)
+        Me.OverrideMdlVersionComboBox.Size = New System.Drawing.Size(128, 22)
         Me.OverrideMdlVersionComboBox.TabIndex = 45
-        Me.ToolTip1.SetToolTip(Me.OverrideMdlVersionComboBox, "Decompile based on this selected version instead of what is stored in MDL file.")
+        Me.ToolTip1.SetToolTip(Me.OverrideMdlVersionComboBox, "根据所选版本反编译 而非根据MDL文件头来判断.")
         '
         'PrefixMeshFileNamesWithModelNameCheckBox
         '
         Me.PrefixMeshFileNamesWithModelNameCheckBox.AutoSize = True
-        Me.PrefixMeshFileNamesWithModelNameCheckBox.Location = New System.Drawing.Point(4, 32)
-        Me.PrefixMeshFileNamesWithModelNameCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PrefixMeshFileNamesWithModelNameCheckBox.Location = New System.Drawing.Point(4, 28)
+        Me.PrefixMeshFileNamesWithModelNameCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.PrefixMeshFileNamesWithModelNameCheckBox.Name = "PrefixMeshFileNamesWithModelNameCheckBox"
-        Me.PrefixMeshFileNamesWithModelNameCheckBox.Size = New System.Drawing.Size(237, 20)
+        Me.PrefixMeshFileNamesWithModelNameCheckBox.Size = New System.Drawing.Size(169, 18)
         Me.PrefixMeshFileNamesWithModelNameCheckBox.TabIndex = 47
-        Me.PrefixMeshFileNamesWithModelNameCheckBox.Text = "Prefix mesh file names with model name"
-        Me.ToolTip1.SetToolTip(Me.PrefixMeshFileNamesWithModelNameCheckBox, "Avoid file name conflicts.")
+        Me.PrefixMeshFileNamesWithModelNameCheckBox.Text = "在网格文件名前添加模型名称"
+        Me.ToolTip1.SetToolTip(Me.PrefixMeshFileNamesWithModelNameCheckBox, "避免文件名冲突.")
         Me.PrefixMeshFileNamesWithModelNameCheckBox.UseVisualStyleBackColor = True
         '
         'Panel2
@@ -236,26 +233,26 @@ Partial Class DecompileUserControl
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(905, 660)
+        Me.Panel2.Size = New System.Drawing.Size(905, 578)
         Me.Panel2.TabIndex = 8
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(4, 10)
+        Me.Label1.Location = New System.Drawing.Point(4, 9)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(75, 16)
+        Me.Label1.Size = New System.Drawing.Size(75, 14)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "MDL input:"
+        Me.Label1.Text = "输入MDL:"
         '
         'DecompileComboBox
         '
         Me.DecompileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.DecompileComboBox.FormattingEnabled = True
-        Me.DecompileComboBox.Location = New System.Drawing.Point(85, 5)
-        Me.DecompileComboBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DecompileComboBox.Location = New System.Drawing.Point(85, 4)
+        Me.DecompileComboBox.Margin = New System.Windows.Forms.Padding(4)
         Me.DecompileComboBox.Name = "DecompileComboBox"
-        Me.DecompileComboBox.Size = New System.Drawing.Size(163, 24)
+        Me.DecompileComboBox.Size = New System.Drawing.Size(163, 22)
         Me.DecompileComboBox.TabIndex = 1
         '
         'MdlPathFileNameTextBox
@@ -264,54 +261,54 @@ Partial Class DecompileUserControl
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MdlPathFileNameTextBox.CueBannerText = ""
         Me.MdlPathFileNameTextBox.Location = New System.Drawing.Point(255, 4)
-        Me.MdlPathFileNameTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MdlPathFileNameTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.MdlPathFileNameTextBox.Name = "MdlPathFileNameTextBox"
-        Me.MdlPathFileNameTextBox.Size = New System.Drawing.Size(507, 21)
+        Me.MdlPathFileNameTextBox.Size = New System.Drawing.Size(507, 22)
         Me.MdlPathFileNameTextBox.TabIndex = 1
         '
         'BrowseForMdlPathFolderOrFileNameButton
         '
         Me.BrowseForMdlPathFolderOrFileNameButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BrowseForMdlPathFolderOrFileNameButton.Location = New System.Drawing.Point(770, 4)
-        Me.BrowseForMdlPathFolderOrFileNameButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BrowseForMdlPathFolderOrFileNameButton.Margin = New System.Windows.Forms.Padding(4)
         Me.BrowseForMdlPathFolderOrFileNameButton.Name = "BrowseForMdlPathFolderOrFileNameButton"
-        Me.BrowseForMdlPathFolderOrFileNameButton.Size = New System.Drawing.Size(75, 28)
+        Me.BrowseForMdlPathFolderOrFileNameButton.Size = New System.Drawing.Size(75, 24)
         Me.BrowseForMdlPathFolderOrFileNameButton.TabIndex = 2
-        Me.BrowseForMdlPathFolderOrFileNameButton.Text = "Browse..."
+        Me.BrowseForMdlPathFolderOrFileNameButton.Text = "浏览..."
         Me.BrowseForMdlPathFolderOrFileNameButton.UseVisualStyleBackColor = True
         '
         'GotoMdlButton
         '
         Me.GotoMdlButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GotoMdlButton.Location = New System.Drawing.Point(852, 4)
-        Me.GotoMdlButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GotoMdlButton.Margin = New System.Windows.Forms.Padding(4)
         Me.GotoMdlButton.Name = "GotoMdlButton"
-        Me.GotoMdlButton.Size = New System.Drawing.Size(50, 28)
+        Me.GotoMdlButton.Size = New System.Drawing.Size(50, 24)
         Me.GotoMdlButton.TabIndex = 3
-        Me.GotoMdlButton.Text = "Goto"
+        Me.GotoMdlButton.Text = "前往"
         Me.GotoMdlButton.UseVisualStyleBackColor = True
         '
         'GotoOutputPathButton
         '
         Me.GotoOutputPathButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GotoOutputPathButton.Location = New System.Drawing.Point(852, 39)
-        Me.GotoOutputPathButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GotoOutputPathButton.Location = New System.Drawing.Point(852, 34)
+        Me.GotoOutputPathButton.Margin = New System.Windows.Forms.Padding(4)
         Me.GotoOutputPathButton.Name = "GotoOutputPathButton"
-        Me.GotoOutputPathButton.Size = New System.Drawing.Size(50, 28)
+        Me.GotoOutputPathButton.Size = New System.Drawing.Size(50, 24)
         Me.GotoOutputPathButton.TabIndex = 18
-        Me.GotoOutputPathButton.Text = "Goto"
+        Me.GotoOutputPathButton.Text = "前往"
         Me.GotoOutputPathButton.UseVisualStyleBackColor = True
         '
         'BrowseForOutputPathButton
         '
         Me.BrowseForOutputPathButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BrowseForOutputPathButton.Enabled = False
-        Me.BrowseForOutputPathButton.Location = New System.Drawing.Point(770, 39)
-        Me.BrowseForOutputPathButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BrowseForOutputPathButton.Location = New System.Drawing.Point(770, 34)
+        Me.BrowseForOutputPathButton.Margin = New System.Windows.Forms.Padding(4)
         Me.BrowseForOutputPathButton.Name = "BrowseForOutputPathButton"
-        Me.BrowseForOutputPathButton.Size = New System.Drawing.Size(75, 28)
+        Me.BrowseForOutputPathButton.Size = New System.Drawing.Size(75, 24)
         Me.BrowseForOutputPathButton.TabIndex = 17
-        Me.BrowseForOutputPathButton.Text = "Browse..."
+        Me.BrowseForOutputPathButton.Text = "浏览..."
         Me.BrowseForOutputPathButton.UseVisualStyleBackColor = True
         '
         'OutputPathTextBox
@@ -320,10 +317,10 @@ Partial Class DecompileUserControl
         Me.OutputPathTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.OutputPathTextBox.CueBannerText = ""
-        Me.OutputPathTextBox.Location = New System.Drawing.Point(255, 39)
-        Me.OutputPathTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OutputPathTextBox.Location = New System.Drawing.Point(255, 34)
+        Me.OutputPathTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.OutputPathTextBox.Name = "OutputPathTextBox"
-        Me.OutputPathTextBox.Size = New System.Drawing.Size(507, 21)
+        Me.OutputPathTextBox.Size = New System.Drawing.Size(507, 22)
         Me.OutputPathTextBox.TabIndex = 16
         '
         'OutputSubfolderTextBox
@@ -331,10 +328,10 @@ Partial Class DecompileUserControl
         Me.OutputSubfolderTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.OutputSubfolderTextBox.CueBannerText = ""
-        Me.OutputSubfolderTextBox.Location = New System.Drawing.Point(255, 39)
-        Me.OutputSubfolderTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OutputSubfolderTextBox.Location = New System.Drawing.Point(255, 34)
+        Me.OutputSubfolderTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.OutputSubfolderTextBox.Name = "OutputSubfolderTextBox"
-        Me.OutputSubfolderTextBox.Size = New System.Drawing.Size(507, 21)
+        Me.OutputSubfolderTextBox.Size = New System.Drawing.Size(507, 22)
         Me.OutputSubfolderTextBox.TabIndex = 20
         Me.OutputSubfolderTextBox.Visible = False
         '
@@ -342,30 +339,30 @@ Partial Class DecompileUserControl
         '
         Me.OutputPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.OutputPathComboBox.FormattingEnabled = True
-        Me.OutputPathComboBox.Location = New System.Drawing.Point(85, 41)
-        Me.OutputPathComboBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OutputPathComboBox.Location = New System.Drawing.Point(85, 36)
+        Me.OutputPathComboBox.Margin = New System.Windows.Forms.Padding(4)
         Me.OutputPathComboBox.Name = "OutputPathComboBox"
-        Me.OutputPathComboBox.Size = New System.Drawing.Size(163, 24)
+        Me.OutputPathComboBox.Size = New System.Drawing.Size(163, 22)
         Me.OutputPathComboBox.TabIndex = 14
         '
         'Label3
         '
-        Me.Label3.Location = New System.Drawing.Point(4, 46)
+        Me.Label3.Location = New System.Drawing.Point(4, 40)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(72, 16)
+        Me.Label3.Size = New System.Drawing.Size(72, 14)
         Me.Label3.TabIndex = 13
-        Me.Label3.Text = "Output to:"
+        Me.Label3.Text = "输出到:"
         '
         'UseDefaultOutputSubfolderButton
         '
         Me.UseDefaultOutputSubfolderButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.UseDefaultOutputSubfolderButton.Location = New System.Drawing.Point(770, 39)
-        Me.UseDefaultOutputSubfolderButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UseDefaultOutputSubfolderButton.Location = New System.Drawing.Point(770, 34)
+        Me.UseDefaultOutputSubfolderButton.Margin = New System.Windows.Forms.Padding(4)
         Me.UseDefaultOutputSubfolderButton.Name = "UseDefaultOutputSubfolderButton"
-        Me.UseDefaultOutputSubfolderButton.Size = New System.Drawing.Size(132, 28)
+        Me.UseDefaultOutputSubfolderButton.Size = New System.Drawing.Size(132, 24)
         Me.UseDefaultOutputSubfolderButton.TabIndex = 19
-        Me.UseDefaultOutputSubfolderButton.Text = "Use Default"
+        Me.UseDefaultOutputSubfolderButton.Text = "重置选项"
         Me.UseDefaultOutputSubfolderButton.UseVisualStyleBackColor = True
         '
         'Options_LogSplitContainer
@@ -374,8 +371,8 @@ Partial Class DecompileUserControl
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Options_LogSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.Options_LogSplitContainer.Location = New System.Drawing.Point(4, 75)
-        Me.Options_LogSplitContainer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Options_LogSplitContainer.Location = New System.Drawing.Point(4, 66)
+        Me.Options_LogSplitContainer.Margin = New System.Windows.Forms.Padding(4)
         Me.Options_LogSplitContainer.Name = "Options_LogSplitContainer"
         Me.Options_LogSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -390,9 +387,8 @@ Partial Class DecompileUserControl
         Me.Options_LogSplitContainer.Panel2.Controls.Add(Me.DecompileButtonsPanel)
         Me.Options_LogSplitContainer.Panel2.Controls.Add(Me.Panel4)
         Me.Options_LogSplitContainer.Panel2MinSize = 45
-        Me.Options_LogSplitContainer.Size = New System.Drawing.Size(898, 581)
+        Me.Options_LogSplitContainer.Size = New System.Drawing.Size(898, 508)
         Me.Options_LogSplitContainer.SplitterDistance = 250
-        Me.Options_LogSplitContainer.SplitterWidth = 5
         Me.Options_LogSplitContainer.TabIndex = 12
         '
         'DecompileOptionsPanel
@@ -401,7 +397,7 @@ Partial Class DecompileUserControl
         Me.DecompileOptionsPanel.Controls.Add(Me.OptionsGroupBox)
         Me.DecompileOptionsPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DecompileOptionsPanel.Location = New System.Drawing.Point(0, 0)
-        Me.DecompileOptionsPanel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DecompileOptionsPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.DecompileOptionsPanel.Name = "DecompileOptionsPanel"
         Me.DecompileOptionsPanel.Size = New System.Drawing.Size(898, 250)
         Me.DecompileOptionsPanel.TabIndex = 8
@@ -412,13 +408,13 @@ Partial Class DecompileUserControl
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ReCreateFilesGroupBox.Controls.Add(Me.Panel1)
         Me.ReCreateFilesGroupBox.Location = New System.Drawing.Point(0, 0)
-        Me.ReCreateFilesGroupBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ReCreateFilesGroupBox.Margin = New System.Windows.Forms.Padding(4)
         Me.ReCreateFilesGroupBox.Name = "ReCreateFilesGroupBox"
-        Me.ReCreateFilesGroupBox.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ReCreateFilesGroupBox.Padding = New System.Windows.Forms.Padding(4)
         Me.ReCreateFilesGroupBox.Size = New System.Drawing.Size(609, 246)
         Me.ReCreateFilesGroupBox.TabIndex = 0
         Me.ReCreateFilesGroupBox.TabStop = False
-        Me.ReCreateFilesGroupBox.Text = "Re-Create Files"
+        Me.ReCreateFilesGroupBox.Text = "重新创建文件"
         '
         'Panel1
         '
@@ -443,184 +439,184 @@ Partial Class DecompileUserControl
         Me.Panel1.Controls.Add(Me.ReferenceMeshSmdFileCheckBox)
         Me.Panel1.Controls.Add(Me.QcFileCheckBox)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(4, 18)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Location = New System.Drawing.Point(4, 19)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(601, 224)
+        Me.Panel1.Size = New System.Drawing.Size(601, 223)
         Me.Panel1.TabIndex = 11
         '
         'OnlyChangedMaterialsInTextureGroupLinesCheckBox
         '
         Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.AutoSize = True
-        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Location = New System.Drawing.Point(23, 60)
-        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Location = New System.Drawing.Point(23, 52)
+        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Name = "OnlyChangedMaterialsInTextureGroupLinesCheckBox"
-        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Size = New System.Drawing.Size(268, 20)
+        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Size = New System.Drawing.Size(198, 18)
         Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.TabIndex = 43
-        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Text = "Only changed materials in $texturegroup lines"
+        Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.Text = "$texturegroup仅包含有变化的材质"
         Me.OnlyChangedMaterialsInTextureGroupLinesCheckBox.UseVisualStyleBackColor = True
         '
         'SkinFamilyOnSingleLineCheckBox
         '
         Me.SkinFamilyOnSingleLineCheckBox.AutoSize = True
-        Me.SkinFamilyOnSingleLineCheckBox.Location = New System.Drawing.Point(23, 32)
-        Me.SkinFamilyOnSingleLineCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SkinFamilyOnSingleLineCheckBox.Location = New System.Drawing.Point(23, 28)
+        Me.SkinFamilyOnSingleLineCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.SkinFamilyOnSingleLineCheckBox.Name = "SkinFamilyOnSingleLineCheckBox"
-        Me.SkinFamilyOnSingleLineCheckBox.Size = New System.Drawing.Size(263, 20)
+        Me.SkinFamilyOnSingleLineCheckBox.Size = New System.Drawing.Size(209, 18)
         Me.SkinFamilyOnSingleLineCheckBox.TabIndex = 39
-        Me.SkinFamilyOnSingleLineCheckBox.Text = "Each $texturegroup skin-family on single line"
+        Me.SkinFamilyOnSingleLineCheckBox.Text = "$texturegroup每个皮肤组单独占一行"
         Me.SkinFamilyOnSingleLineCheckBox.UseVisualStyleBackColor = True
         '
         'TextureBmpFilesCheckBox
         '
         Me.TextureBmpFilesCheckBox.AutoSize = True
         Me.TextureBmpFilesCheckBox.Location = New System.Drawing.Point(371, 4)
-        Me.TextureBmpFilesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextureBmpFilesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.TextureBmpFilesCheckBox.Name = "TextureBmpFilesCheckBox"
-        Me.TextureBmpFilesCheckBox.Size = New System.Drawing.Size(189, 20)
+        Me.TextureBmpFilesCheckBox.Size = New System.Drawing.Size(166, 18)
         Me.TextureBmpFilesCheckBox.TabIndex = 38
-        Me.TextureBmpFilesCheckBox.Text = "Texture BMP files (GoldSource)"
+        Me.TextureBmpFilesCheckBox.Text = "贴图BMP文件 (GoldSource)"
         Me.TextureBmpFilesCheckBox.UseVisualStyleBackColor = True
         '
         'DecompileOptionsUseDefaultsButton
         '
-        Me.DecompileOptionsUseDefaultsButton.Location = New System.Drawing.Point(248, 242)
-        Me.DecompileOptionsUseDefaultsButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DecompileOptionsUseDefaultsButton.Location = New System.Drawing.Point(248, 212)
+        Me.DecompileOptionsUseDefaultsButton.Margin = New System.Windows.Forms.Padding(4)
         Me.DecompileOptionsUseDefaultsButton.Name = "DecompileOptionsUseDefaultsButton"
-        Me.DecompileOptionsUseDefaultsButton.Size = New System.Drawing.Size(105, 28)
+        Me.DecompileOptionsUseDefaultsButton.Size = New System.Drawing.Size(105, 24)
         Me.DecompileOptionsUseDefaultsButton.TabIndex = 37
-        Me.DecompileOptionsUseDefaultsButton.Text = "Use Defaults"
+        Me.DecompileOptionsUseDefaultsButton.Text = "重置选项"
         Me.DecompileOptionsUseDefaultsButton.UseVisualStyleBackColor = True
         '
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(93, 245)
-        Me.ComboBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ComboBox2.Location = New System.Drawing.Point(93, 214)
+        Me.ComboBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(145, 24)
+        Me.ComboBox2.Size = New System.Drawing.Size(145, 22)
         Me.ComboBox2.TabIndex = 15
         Me.ComboBox2.Visible = False
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 249)
+        Me.Label2.Location = New System.Drawing.Point(4, 218)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 16)
+        Me.Label2.Size = New System.Drawing.Size(54, 14)
         Me.Label2.TabIndex = 23
-        Me.Label2.Text = "Model format:"
+        Me.Label2.Text = "模型格式:"
         Me.Label2.Visible = False
         '
         'IncludeDefineBoneLinesCheckBox
         '
         Me.IncludeDefineBoneLinesCheckBox.AutoSize = True
-        Me.IncludeDefineBoneLinesCheckBox.Location = New System.Drawing.Point(23, 89)
-        Me.IncludeDefineBoneLinesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.IncludeDefineBoneLinesCheckBox.Location = New System.Drawing.Point(23, 78)
+        Me.IncludeDefineBoneLinesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.IncludeDefineBoneLinesCheckBox.Name = "IncludeDefineBoneLinesCheckBox"
-        Me.IncludeDefineBoneLinesCheckBox.Size = New System.Drawing.Size(293, 20)
+        Me.IncludeDefineBoneLinesCheckBox.Size = New System.Drawing.Size(255, 18)
         Me.IncludeDefineBoneLinesCheckBox.TabIndex = 2
-        Me.IncludeDefineBoneLinesCheckBox.Text = "Include $definebone lines (typical for view models)"
+        Me.IncludeDefineBoneLinesCheckBox.Text = "包括$definebone行 (typical for view models)"
         Me.IncludeDefineBoneLinesCheckBox.UseVisualStyleBackColor = True
         '
         'GroupIntoQciFilesCheckBox
         '
         Me.GroupIntoQciFilesCheckBox.AutoSize = True
         Me.GroupIntoQciFilesCheckBox.Location = New System.Drawing.Point(93, 4)
-        Me.GroupIntoQciFilesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupIntoQciFilesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupIntoQciFilesCheckBox.Name = "GroupIntoQciFilesCheckBox"
-        Me.GroupIntoQciFilesCheckBox.Size = New System.Drawing.Size(129, 20)
+        Me.GroupIntoQciFilesCheckBox.Size = New System.Drawing.Size(112, 18)
         Me.GroupIntoQciFilesCheckBox.TabIndex = 1
-        Me.GroupIntoQciFilesCheckBox.Text = "Group into QCI files"
+        Me.GroupIntoQciFilesCheckBox.Text = "分散到QCI文件中"
         Me.GroupIntoQciFilesCheckBox.UseVisualStyleBackColor = True
         '
         'PlaceInAnimsSubfolderCheckBox
         '
         Me.PlaceInAnimsSubfolderCheckBox.AutoSize = True
-        Me.PlaceInAnimsSubfolderCheckBox.Location = New System.Drawing.Point(391, 174)
-        Me.PlaceInAnimsSubfolderCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PlaceInAnimsSubfolderCheckBox.Location = New System.Drawing.Point(391, 152)
+        Me.PlaceInAnimsSubfolderCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.PlaceInAnimsSubfolderCheckBox.Name = "PlaceInAnimsSubfolderCheckBox"
-        Me.PlaceInAnimsSubfolderCheckBox.Size = New System.Drawing.Size(164, 20)
+        Me.PlaceInAnimsSubfolderCheckBox.Size = New System.Drawing.Size(130, 18)
         Me.PlaceInAnimsSubfolderCheckBox.TabIndex = 9
-        Me.PlaceInAnimsSubfolderCheckBox.Text = "Place in ""anims"" subfolder"
+        Me.PlaceInAnimsSubfolderCheckBox.Text = "放在""anims""子文件夹"
         Me.PlaceInAnimsSubfolderCheckBox.UseVisualStyleBackColor = True
         '
         'LodMeshSmdFilesCheckBox
         '
         Me.LodMeshSmdFilesCheckBox.AutoSize = True
-        Me.LodMeshSmdFilesCheckBox.Location = New System.Drawing.Point(371, 32)
-        Me.LodMeshSmdFilesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LodMeshSmdFilesCheckBox.Location = New System.Drawing.Point(371, 28)
+        Me.LodMeshSmdFilesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.LodMeshSmdFilesCheckBox.Name = "LodMeshSmdFilesCheckBox"
-        Me.LodMeshSmdFilesCheckBox.Size = New System.Drawing.Size(132, 20)
+        Me.LodMeshSmdFilesCheckBox.Size = New System.Drawing.Size(117, 18)
         Me.LodMeshSmdFilesCheckBox.TabIndex = 5
-        Me.LodMeshSmdFilesCheckBox.Text = "LOD mesh SMD files"
+        Me.LodMeshSmdFilesCheckBox.Text = "LOD网格SMD文件"
         Me.LodMeshSmdFilesCheckBox.UseVisualStyleBackColor = True
         '
         'ProceduralBonesVrdFileCheckBox
         '
         Me.ProceduralBonesVrdFileCheckBox.AutoSize = True
-        Me.ProceduralBonesVrdFileCheckBox.Location = New System.Drawing.Point(371, 117)
-        Me.ProceduralBonesVrdFileCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ProceduralBonesVrdFileCheckBox.Location = New System.Drawing.Point(371, 102)
+        Me.ProceduralBonesVrdFileCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.ProceduralBonesVrdFileCheckBox.Name = "ProceduralBonesVrdFileCheckBox"
-        Me.ProceduralBonesVrdFileCheckBox.Size = New System.Drawing.Size(162, 20)
+        Me.ProceduralBonesVrdFileCheckBox.Size = New System.Drawing.Size(114, 18)
         Me.ProceduralBonesVrdFileCheckBox.TabIndex = 10
-        Me.ProceduralBonesVrdFileCheckBox.Text = "Procedural bones VRD file"
+        Me.ProceduralBonesVrdFileCheckBox.Text = "程序骨骼VRD文件"
         Me.ProceduralBonesVrdFileCheckBox.UseVisualStyleBackColor = True
         '
         'BoneAnimationSmdFilesCheckBox
         '
         Me.BoneAnimationSmdFilesCheckBox.AutoSize = True
-        Me.BoneAnimationSmdFilesCheckBox.Location = New System.Drawing.Point(371, 145)
-        Me.BoneAnimationSmdFilesCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BoneAnimationSmdFilesCheckBox.Location = New System.Drawing.Point(371, 127)
+        Me.BoneAnimationSmdFilesCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BoneAnimationSmdFilesCheckBox.Name = "BoneAnimationSmdFilesCheckBox"
-        Me.BoneAnimationSmdFilesCheckBox.Size = New System.Drawing.Size(161, 20)
+        Me.BoneAnimationSmdFilesCheckBox.Size = New System.Drawing.Size(116, 18)
         Me.BoneAnimationSmdFilesCheckBox.TabIndex = 8
-        Me.BoneAnimationSmdFilesCheckBox.Text = "Bone animation SMD files"
+        Me.BoneAnimationSmdFilesCheckBox.Text = "骨骼动画SMD文件"
         Me.BoneAnimationSmdFilesCheckBox.UseVisualStyleBackColor = True
         '
         'VertexAnimationVtaFileCheckBox
         '
         Me.VertexAnimationVtaFileCheckBox.AutoSize = True
-        Me.VertexAnimationVtaFileCheckBox.Location = New System.Drawing.Point(371, 89)
-        Me.VertexAnimationVtaFileCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.VertexAnimationVtaFileCheckBox.Location = New System.Drawing.Point(371, 78)
+        Me.VertexAnimationVtaFileCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.VertexAnimationVtaFileCheckBox.Name = "VertexAnimationVtaFileCheckBox"
-        Me.VertexAnimationVtaFileCheckBox.Size = New System.Drawing.Size(199, 20)
+        Me.VertexAnimationVtaFileCheckBox.Size = New System.Drawing.Size(153, 18)
         Me.VertexAnimationVtaFileCheckBox.TabIndex = 7
-        Me.VertexAnimationVtaFileCheckBox.Text = "Vertex animation VTA file (flexes)"
+        Me.VertexAnimationVtaFileCheckBox.Text = "顶点动画VTA文件 (flexes)"
         Me.VertexAnimationVtaFileCheckBox.UseVisualStyleBackColor = True
         '
         'PhysicsMeshSmdFileCheckBox
         '
         Me.PhysicsMeshSmdFileCheckBox.AutoSize = True
-        Me.PhysicsMeshSmdFileCheckBox.Location = New System.Drawing.Point(371, 60)
-        Me.PhysicsMeshSmdFileCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PhysicsMeshSmdFileCheckBox.Location = New System.Drawing.Point(371, 52)
+        Me.PhysicsMeshSmdFileCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.PhysicsMeshSmdFileCheckBox.Name = "PhysicsMeshSmdFileCheckBox"
-        Me.PhysicsMeshSmdFileCheckBox.Size = New System.Drawing.Size(143, 20)
+        Me.PhysicsMeshSmdFileCheckBox.Size = New System.Drawing.Size(116, 18)
         Me.PhysicsMeshSmdFileCheckBox.TabIndex = 6
-        Me.PhysicsMeshSmdFileCheckBox.Text = "Physics mesh SMD file"
+        Me.PhysicsMeshSmdFileCheckBox.Text = "物理网格SMD文件"
         Me.PhysicsMeshSmdFileCheckBox.UseVisualStyleBackColor = True
         '
         'ReferenceMeshSmdFileCheckBox
         '
         Me.ReferenceMeshSmdFileCheckBox.AutoSize = True
-        Me.ReferenceMeshSmdFileCheckBox.Location = New System.Drawing.Point(4, 145)
-        Me.ReferenceMeshSmdFileCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ReferenceMeshSmdFileCheckBox.Location = New System.Drawing.Point(4, 127)
+        Me.ReferenceMeshSmdFileCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.ReferenceMeshSmdFileCheckBox.Name = "ReferenceMeshSmdFileCheckBox"
-        Me.ReferenceMeshSmdFileCheckBox.Size = New System.Drawing.Size(156, 20)
+        Me.ReferenceMeshSmdFileCheckBox.Size = New System.Drawing.Size(116, 18)
         Me.ReferenceMeshSmdFileCheckBox.TabIndex = 3
-        Me.ReferenceMeshSmdFileCheckBox.Text = "Reference mesh SMD file"
+        Me.ReferenceMeshSmdFileCheckBox.Text = "参考网格SMD文件"
         Me.ReferenceMeshSmdFileCheckBox.UseVisualStyleBackColor = True
         '
         'QcFileCheckBox
         '
         Me.QcFileCheckBox.AutoSize = True
         Me.QcFileCheckBox.Location = New System.Drawing.Point(4, 4)
-        Me.QcFileCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.QcFileCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.QcFileCheckBox.Name = "QcFileCheckBox"
-        Me.QcFileCheckBox.Size = New System.Drawing.Size(61, 20)
+        Me.QcFileCheckBox.Size = New System.Drawing.Size(65, 18)
         Me.QcFileCheckBox.TabIndex = 0
-        Me.QcFileCheckBox.Text = "QC file"
+        Me.QcFileCheckBox.Text = "QC文件"
         Me.QcFileCheckBox.UseVisualStyleBackColor = True
         '
         'OptionsGroupBox
@@ -630,13 +626,13 @@ Partial Class DecompileUserControl
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.OptionsGroupBox.Controls.Add(Me.Panel3)
         Me.OptionsGroupBox.Location = New System.Drawing.Point(616, 0)
-        Me.OptionsGroupBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OptionsGroupBox.Margin = New System.Windows.Forms.Padding(4)
         Me.OptionsGroupBox.Name = "OptionsGroupBox"
-        Me.OptionsGroupBox.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OptionsGroupBox.Padding = New System.Windows.Forms.Padding(4)
         Me.OptionsGroupBox.Size = New System.Drawing.Size(282, 246)
         Me.OptionsGroupBox.TabIndex = 6
         Me.OptionsGroupBox.TabStop = False
-        Me.OptionsGroupBox.Text = "Options"
+        Me.OptionsGroupBox.Text = "选项"
         '
         'Panel3
         '
@@ -650,21 +646,21 @@ Partial Class DecompileUserControl
         Me.Panel3.Controls.Add(Me.DeclareSequenceQciCheckBox)
         Me.Panel3.Controls.Add(Me.FormatForStricterImportersCheckBox)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(4, 18)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Location = New System.Drawing.Point(4, 19)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(274, 224)
+        Me.Panel3.Size = New System.Drawing.Size(274, 223)
         Me.Panel3.TabIndex = 0
         '
         'FolderForEachModelCheckBox
         '
         Me.FolderForEachModelCheckBox.AutoSize = True
         Me.FolderForEachModelCheckBox.Location = New System.Drawing.Point(4, 4)
-        Me.FolderForEachModelCheckBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FolderForEachModelCheckBox.Margin = New System.Windows.Forms.Padding(4)
         Me.FolderForEachModelCheckBox.Name = "FolderForEachModelCheckBox"
-        Me.FolderForEachModelCheckBox.Size = New System.Drawing.Size(141, 20)
+        Me.FolderForEachModelCheckBox.Size = New System.Drawing.Size(114, 18)
         Me.FolderForEachModelCheckBox.TabIndex = 11
-        Me.FolderForEachModelCheckBox.Text = "Folder for each model"
+        Me.FolderForEachModelCheckBox.Text = "每个模型的文件夹"
         Me.FolderForEachModelCheckBox.UseVisualStyleBackColor = True
         '
         'DecompilerLogTextBox
@@ -672,13 +668,14 @@ Partial Class DecompileUserControl
         Me.DecompilerLogTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.DecompilerLogTextBox.CueBannerText = ""
         Me.DecompilerLogTextBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DecompilerLogTextBox.Font = New System.Drawing.Font("Cascadia Mono", 10.0!, System.Drawing.FontStyle.Bold)
         Me.DecompilerLogTextBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.DecompilerLogTextBox.HideSelection = False
-        Me.DecompilerLogTextBox.Location = New System.Drawing.Point(0, 32)
-        Me.DecompilerLogTextBox.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.DecompilerLogTextBox.Location = New System.Drawing.Point(0, 28)
+        Me.DecompilerLogTextBox.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
         Me.DecompilerLogTextBox.Name = "DecompilerLogTextBox"
         Me.DecompilerLogTextBox.ReadOnly = True
-        Me.DecompilerLogTextBox.Size = New System.Drawing.Size(898, 262)
+        Me.DecompilerLogTextBox.Size = New System.Drawing.Size(898, 198)
         Me.DecompilerLogTextBox.TabIndex = 0
         Me.DecompilerLogTextBox.Text = ""
         Me.DecompilerLogTextBox.WordWrap = False
@@ -691,52 +688,52 @@ Partial Class DecompileUserControl
         Me.DecompileButtonsPanel.Controls.Add(Me.UseAllInCompileButton)
         Me.DecompileButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.DecompileButtonsPanel.Location = New System.Drawing.Point(0, 0)
-        Me.DecompileButtonsPanel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DecompileButtonsPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.DecompileButtonsPanel.Name = "DecompileButtonsPanel"
-        Me.DecompileButtonsPanel.Size = New System.Drawing.Size(898, 32)
+        Me.DecompileButtonsPanel.Size = New System.Drawing.Size(898, 28)
         Me.DecompileButtonsPanel.TabIndex = 7
         '
         'DecompileButton
         '
         Me.DecompileButton.Location = New System.Drawing.Point(0, 0)
-        Me.DecompileButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DecompileButton.Margin = New System.Windows.Forms.Padding(4)
         Me.DecompileButton.Name = "DecompileButton"
-        Me.DecompileButton.Size = New System.Drawing.Size(140, 28)
+        Me.DecompileButton.Size = New System.Drawing.Size(140, 24)
         Me.DecompileButton.TabIndex = 2
-        Me.DecompileButton.Text = "&Decompile"
+        Me.DecompileButton.Text = "&反编译"
         Me.DecompileButton.UseVisualStyleBackColor = True
         '
         'SkipCurrentModelButton
         '
         Me.SkipCurrentModelButton.Enabled = False
         Me.SkipCurrentModelButton.Location = New System.Drawing.Point(147, 0)
-        Me.SkipCurrentModelButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SkipCurrentModelButton.Margin = New System.Windows.Forms.Padding(4)
         Me.SkipCurrentModelButton.Name = "SkipCurrentModelButton"
-        Me.SkipCurrentModelButton.Size = New System.Drawing.Size(140, 28)
+        Me.SkipCurrentModelButton.Size = New System.Drawing.Size(140, 24)
         Me.SkipCurrentModelButton.TabIndex = 3
-        Me.SkipCurrentModelButton.Text = "Skip Current Model"
+        Me.SkipCurrentModelButton.Text = "跳过当前模型"
         Me.SkipCurrentModelButton.UseVisualStyleBackColor = True
         '
         'CancelDecompileButton
         '
         Me.CancelDecompileButton.Enabled = False
         Me.CancelDecompileButton.Location = New System.Drawing.Point(294, 0)
-        Me.CancelDecompileButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CancelDecompileButton.Margin = New System.Windows.Forms.Padding(4)
         Me.CancelDecompileButton.Name = "CancelDecompileButton"
-        Me.CancelDecompileButton.Size = New System.Drawing.Size(140, 28)
+        Me.CancelDecompileButton.Size = New System.Drawing.Size(140, 24)
         Me.CancelDecompileButton.TabIndex = 4
-        Me.CancelDecompileButton.Text = "Cancel Decompile"
+        Me.CancelDecompileButton.Text = "取消反编译"
         Me.CancelDecompileButton.UseVisualStyleBackColor = True
         '
         'UseAllInCompileButton
         '
         Me.UseAllInCompileButton.Enabled = False
         Me.UseAllInCompileButton.Location = New System.Drawing.Point(441, 0)
-        Me.UseAllInCompileButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UseAllInCompileButton.Margin = New System.Windows.Forms.Padding(4)
         Me.UseAllInCompileButton.Name = "UseAllInCompileButton"
-        Me.UseAllInCompileButton.Size = New System.Drawing.Size(140, 28)
+        Me.UseAllInCompileButton.Size = New System.Drawing.Size(140, 24)
         Me.UseAllInCompileButton.TabIndex = 5
-        Me.UseAllInCompileButton.Text = "Use All in Compile"
+        Me.UseAllInCompileButton.Text = "全部转到编译页"
         Me.UseAllInCompileButton.UseVisualStyleBackColor = True
         '
         'Panel4
@@ -746,10 +743,10 @@ Partial Class DecompileUserControl
         Me.Panel4.Controls.Add(Me.UseInCompileButton)
         Me.Panel4.Controls.Add(Me.GotoDecompiledFileButton)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel4.Location = New System.Drawing.Point(0, 294)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Location = New System.Drawing.Point(0, 226)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(898, 32)
+        Me.Panel4.Size = New System.Drawing.Size(898, 28)
         Me.Panel4.TabIndex = 8
         '
         'DecompiledFilesComboBox
@@ -758,10 +755,10 @@ Partial Class DecompileUserControl
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DecompiledFilesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.DecompiledFilesComboBox.FormattingEnabled = True
-        Me.DecompiledFilesComboBox.Location = New System.Drawing.Point(0, 5)
-        Me.DecompiledFilesComboBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DecompiledFilesComboBox.Location = New System.Drawing.Point(0, 4)
+        Me.DecompiledFilesComboBox.Margin = New System.Windows.Forms.Padding(4)
         Me.DecompiledFilesComboBox.Name = "DecompiledFilesComboBox"
-        Me.DecompiledFilesComboBox.Size = New System.Drawing.Size(724, 24)
+        Me.DecompiledFilesComboBox.Size = New System.Drawing.Size(724, 22)
         Me.DecompiledFilesComboBox.TabIndex = 1
         '
         'UseInEditButton
@@ -769,11 +766,11 @@ Partial Class DecompileUserControl
         Me.UseInEditButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UseInEditButton.Enabled = False
         Me.UseInEditButton.Location = New System.Drawing.Point(643, 4)
-        Me.UseInEditButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UseInEditButton.Margin = New System.Windows.Forms.Padding(4)
         Me.UseInEditButton.Name = "UseInEditButton"
-        Me.UseInEditButton.Size = New System.Drawing.Size(84, 28)
+        Me.UseInEditButton.Size = New System.Drawing.Size(84, 24)
         Me.UseInEditButton.TabIndex = 2
-        Me.UseInEditButton.Text = "Use in Edit"
+        Me.UseInEditButton.Text = "转到编辑页"
         Me.UseInEditButton.UseVisualStyleBackColor = True
         Me.UseInEditButton.Visible = False
         '
@@ -782,32 +779,32 @@ Partial Class DecompileUserControl
         Me.UseInCompileButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.UseInCompileButton.Enabled = False
         Me.UseInCompileButton.Location = New System.Drawing.Point(732, 4)
-        Me.UseInCompileButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UseInCompileButton.Margin = New System.Windows.Forms.Padding(4)
         Me.UseInCompileButton.Name = "UseInCompileButton"
-        Me.UseInCompileButton.Size = New System.Drawing.Size(110, 28)
+        Me.UseInCompileButton.Size = New System.Drawing.Size(110, 24)
         Me.UseInCompileButton.TabIndex = 3
-        Me.UseInCompileButton.Text = "Use in Compile"
+        Me.UseInCompileButton.Text = "转到编译页"
         Me.UseInCompileButton.UseVisualStyleBackColor = True
         '
         'GotoDecompiledFileButton
         '
         Me.GotoDecompiledFileButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GotoDecompiledFileButton.Location = New System.Drawing.Point(848, 4)
-        Me.GotoDecompiledFileButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GotoDecompiledFileButton.Margin = New System.Windows.Forms.Padding(4)
         Me.GotoDecompiledFileButton.Name = "GotoDecompiledFileButton"
-        Me.GotoDecompiledFileButton.Size = New System.Drawing.Size(50, 28)
+        Me.GotoDecompiledFileButton.Size = New System.Drawing.Size(50, 24)
         Me.GotoDecompiledFileButton.TabIndex = 4
-        Me.GotoDecompiledFileButton.Text = "Goto"
+        Me.GotoDecompiledFileButton.Text = "前往"
         Me.GotoDecompiledFileButton.UseVisualStyleBackColor = True
         '
         'DecompileUserControl
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Panel2)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "DecompileUserControl"
-        Me.Size = New System.Drawing.Size(905, 660)
+        Me.Size = New System.Drawing.Size(905, 578)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Options_LogSplitContainer.Panel1.ResumeLayout(False)

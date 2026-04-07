@@ -149,7 +149,7 @@ Public Class PackUserControl
 	Private Sub BrowseForInputFolderOrFileNameButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BrowseForInputFolderOrFileNameButton.Click
 		Dim openFileWdw As New OpenFileDialog()
 
-		openFileWdw.Title = "Open the folder you want to pack"
+		openFileWdw.Title = "打开要打包的文件夹"
 		If Directory.Exists(TheApp.Settings.PackInputPath) Then
 			openFileWdw.InitialDirectory = TheApp.Settings.PackInputPath
 		Else
@@ -158,7 +158,7 @@ Public Class PackUserControl
 				openFileWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			End If
 		End If
-		openFileWdw.FileName = "[Folder Selection]"
+		openFileWdw.FileName = "[选择文件夹]"
 		openFileWdw.AddExtension = False
 		openFileWdw.CheckFileExists = False
 		openFileWdw.Multiselect = False
@@ -290,14 +290,14 @@ Public Class PackUserControl
 		Dim statusText As String
 
 		If e.Cancelled Then
-			statusText = "Pack canceled"
+			statusText = "已取消打包"
 		Else
 			Dim packResultInfo As PackerOutputInfo
 			packResultInfo = CType(e.Result, PackerOutputInfo)
 			If packResultInfo.theStatus = StatusMessage.Error Then
-				statusText = "Pack failed; check the log"
+				statusText = "打包失败; 检查日志"
 			Else
-				statusText = "Pack succeeded"
+				statusText = "打包成功"
 			End If
 			Me.UpdatePackedRelativePathFileNames(packResultInfo.thePackedRelativePathFileNames)
 		End If
@@ -514,7 +514,7 @@ Public Class PackUserControl
 			'      does not show the path name bar nor does it scroll to the selected folder in the folder tree view.
 			Dim outputPathWdw As New OpenFileDialog()
 
-			outputPathWdw.Title = "Open the folder you want as Output Folder"
+			outputPathWdw.Title = "打开你想作为输出位置的文件夹"
 			outputPathWdw.InitialDirectory = FileManager.GetLongestExtantPath(TheApp.Settings.PackOutputPath)
 			If outputPathWdw.InitialDirectory = "" Then
 				If File.Exists(TheApp.Settings.PackInputPath) Then
@@ -525,7 +525,7 @@ Public Class PackUserControl
 					outputPathWdw.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 				End If
 			End If
-			outputPathWdw.FileName = "[Folder Selection]"
+			outputPathWdw.FileName = "[选择文件夹]"
 			outputPathWdw.AddExtension = False
 			outputPathWdw.CheckFileExists = False
 			outputPathWdw.Multiselect = False
@@ -556,10 +556,14 @@ Public Class PackUserControl
 
 #Region "Data"
 
-	Private theWarningMessgeAboutInvalidJsonFormat As String = "WARNING: The addon.json file is invalid json format. Crowbar will overwrite the file with current options."
+	Private theWarningMessgeAboutInvalidJsonFormat As String = "警告: addon.json文件为无效格式 Crowbar将使用当前选项覆盖文件."
 	Private theSelectedPackerOptions As List(Of String)
 	Private thePackedRelativePathFileNames As BindingListEx(Of String)
 	Private theGmaGarrysModTagsUserControlIsBeingChangedByMe As Boolean
+
+	Private Sub GmaGarrysModTagsUserControl_Load(sender As Object, e As EventArgs) Handles GmaGarrysModTagsUserControl.Load
+
+	End Sub
 
 #End Region
 

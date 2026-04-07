@@ -21,7 +21,7 @@ Public Class AboutUserControl
 		Me.GotoSteamGroupLinkLabel.Text = My.Resources.About_GotoSteamGroupText
 		Me.GotoSteamGroupLinkLabel.Links.Add(0, My.Resources.About_GotoSteamGroupText.Length(), My.Resources.About_ProductLink)
 
-		Me.ProductInfoTextBox.Text = "Version " + My.Application.Info.Version.ToString(2) + vbCrLf
+		Me.ProductInfoTextBox.Text = "版本 " + My.Application.Info.Version.ToString(2) + vbCrLf
 		Me.ProductInfoTextBox.Text += My.Application.Info.Copyright + vbCrLf
 		Me.ProductInfoTextBox.Text += My.Application.Info.CompanyName
 
@@ -75,6 +75,10 @@ Public Class AboutUserControl
 
 	Private Sub PayPalPictureBox_Click(sender As Object, e As EventArgs) Handles PayPalPictureBox.Click
 		System.Diagnostics.Process.Start(My.Resources.About_PayPalLink)
+	End Sub
+
+	Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+		System.Diagnostics.Process.Start("https://steamcommunity.com/id/ARCPAV/")
 	End Sub
 
 #End Region
