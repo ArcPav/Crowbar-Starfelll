@@ -500,6 +500,23 @@ Public Class SteamPipe
 		Return result
 	End Function
 
+	'NOTE: Checks Steam for whatever Title/Description an already-published item currently has
+	'      stored for one specific non-English language (see SteamUGC_GetItemLocalization in
+	'      CrowbarSteamPipe.vb). Returns "" for title/description if that language has nothing
+	'      set yet, which is a normal/expected result, not an error.
+	Public Function SteamUGC_GetItemLocalization(ByVal itemID_text As String, ByVal language As String, ByRef title As String, ByRef description As String) As String
+		Me.theStreamWriter.WriteLine("SteamUGC_GetItemLocalization")
+		Me.theStreamWriter.WriteLine(itemID_text)
+		Me.theStreamWriter.WriteLine(language)
+
+		Dim result As String = Me.theStreamReader.ReadLine()
+		If result = "success" Then
+			title = Me.ReadMultipleLinesOfText(Me.theStreamReader)
+			description = Me.ReadMultipleLinesOfText(Me.theStreamReader)
+		End If
+		Return result
+	End Function
+
 	'Public Function SteamUGC_SendQueryUGCRequest_ContentPathOrFileName() As String
 	'	Me.theStreamWriter.WriteLine("SteamUGC_SendQueryUGCRequest_ContentPathOrFileName")
 	'	Dim contentPathOrFileName As String = ""
@@ -534,6 +551,16 @@ Public Class SteamPipe
 	End Function
 
 #Region "SteamUGC_SetItem Details"
+
+	'NOTE: Must be called before SteamUGC_SetItemTitle/SteamUGC_SetItemDescription for a given
+	'      StartItemUpdate/SubmitItemUpdate cycle, to say which language the title/description
+	'      that follow are for. If never called, "english" is assumed by Steam.
+	Public Function SteamUGC_SetItemUpdateLanguage(ByVal language As String) As String
+		Me.theStreamWriter.WriteLine("SteamUGC_SetItemUpdateLanguage")
+		Me.theStreamWriter.WriteLine(language)
+		Dim result As String = Me.theStreamReader.ReadLine()
+		Return result
+	End Function
 
 	Public Function SteamUGC_SetItemTitle(ByVal title As String) As String
 		Me.theStreamWriter.WriteLine("SteamUGC_SetItemTitle")

@@ -472,6 +472,7 @@
     <Compile Include="Core\Steam\SteamRemoteStorage_PublishedFileDetails_Json.vb" />
     <Compile Include="Core\Steam\WorkshopItem.vb" />
     <Compile Include="Core\Steam\WorkshopItemBindingList.vb" />
+    <Compile Include="Core\Steam\WorkshopItemLocalization.vb" />
     <Compile Include="Core\Unpacker\UnpackerInputInfo.vb" />
     <Compile Include="Core\Unpacker\SearchOutputInfo.vb" />
     <Compile Include="Core\Unpacker\UnpackerOutputInfo.vb" />

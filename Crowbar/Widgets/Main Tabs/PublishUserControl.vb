@@ -293,9 +293,17 @@ Public Class PublishUserControl
 		Me.ItemOwnerTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "OwnerName", False, DataSourceUpdateMode.OnValidation)
 		Me.ItemPostedTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "Posted", False, DataSourceUpdateMode.OnValidation)
 		Me.ItemUpdatedTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "Updated", False, DataSourceUpdateMode.OnValidation)
-		Me.ItemTitleTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "Title", False, DataSourceUpdateMode.OnPropertyChanged)
-		'NOTE: For RichTextBox, set the Formatting argument to True when DataSourceUpdateMode.OnPropertyChanged is used, to prevent characters being entered in reverse order.
-		Me.ItemDescriptionTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "Description", True, DataSourceUpdateMode.OnPropertyChanged)
+
+		Me.ItemLanguageComboBox.DisplayMember = "DisplayName"
+		Me.ItemLanguageComboBox.ValueMember = "LanguageCode"
+		Me.ItemLanguageComboBox.DataSource = WorkshopItem.SupportedLocalizationLanguages
+		Me.ItemLanguageComboBox.SelectedIndex = 0
+
+		'NOTE: ItemTitleTextBox/ItemDescriptionTextBox are NOT bound directly to Item.Title/Description
+		'      here, because which object they should read/write from depends on which language is
+		'      currently selected in ItemLanguageComboBox (Item itself for "english", otherwise one of
+		'      Item.Localizations). See LoadTitleAndDescriptionForCurrentLanguage() and the TextChanged
+		'      handlers below, which do this synchronization manually instead.
 		Me.ItemChangeNoteTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "ChangeNote", True, DataSourceUpdateMode.OnPropertyChanged)
 		Me.UpdateWordWrapButtons()
 		Me.ItemContentPathFileNameTextBox.DataBindings.Add("Text", Me.theItemBindingSource, "ContentPathFolderOrFileName", False, DataSourceUpdateMode.OnValidation)
@@ -316,6 +324,82 @@ Public Class PublishUserControl
 #End Region
 
 #Region "Methods"
+
+	'NOTE: Populates ItemTitleTextBox/ItemDescriptionTextBox from Item.Title/Description ("english")
+	'      or from the matching Item.Localizations entry, for whichever language is currently
+	'      selected in ItemLanguageComboBox.
+	Private Sub LoadTitleAndDescriptionForCurrentLanguage()
+		Me.theIsLoadingLanguageText = True
+		Try
+			If Me.theCurrentLanguageCode = "english" Then
+				Me.ItemTitleTextBox.Text = Me.theSelectedItem.Title
+				Me.ItemDescriptionTextBox.Text = Me.theSelectedItem.Description
+			Else
+				Dim aLocalization As WorkshopItemLocalization = Me.theSelectedItem.GetLocalization(Me.theCurrentLanguageCode)
+				If aLocalization IsNot Nothing Then
+					Me.ItemTitleTextBox.Text = aLocalization.Title
+					Me.ItemDescriptionTextBox.Text = aLocalization.Description
+				Else
+					Me.ItemTitleTextBox.Text = ""
+					Me.ItemDescriptionTextBox.Text = ""
+				End If
+			End If
+		Finally
+			Me.theIsLoadingLanguageText = False
+		End Try
+		Me.UpdateItemTitleLabel()
+		Me.UpdateItemDescriptionLabel()
+	End Sub
+
+	'NOTE: Writes ItemTitleTextBox.Text into Item.Title ("english") or Item.Localizations for the
+	'      currently selected language. Avoids creating an empty Localizations entry just because
+	'      an empty language tab was viewed without anything being typed into it.
+	Private Sub SetCurrentLanguageTitle(ByVal value As String)
+		If Me.theCurrentLanguageCode = "english" Then
+			Me.theSelectedItem.Title = value
+		Else
+			If value = "" AndAlso Me.theSelectedItem.GetLocalization(Me.theCurrentLanguageCode) Is Nothing Then
+				Exit Sub
+			End If
+			Me.theSelectedItem.GetOrCreateLocalization(Me.theCurrentLanguageCode).Title = value
+		End If
+	End Sub
+
+	Private Sub SetCurrentLanguageDescription(ByVal value As String)
+		If Me.theCurrentLanguageCode = "english" Then
+			Me.theSelectedItem.Description = value
+		Else
+			If value = "" AndAlso Me.theSelectedItem.GetLocalization(Me.theCurrentLanguageCode) Is Nothing Then
+				Exit Sub
+			End If
+			Me.theSelectedItem.GetOrCreateLocalization(Me.theCurrentLanguageCode).Description = value
+		End If
+	End Sub
+
+	'NOTE: If the currently selected language is not "english", belongs to an already-published
+	'      item (not a draft/template, which cannot have anything stored on Steam yet), has not
+	'      already been typed into locally, and has not already been checked this session, this
+	'      queries Steam in the background for whatever Title/Description that item may already
+	'      have for that language. Without this, switching to a language nobody has typed into
+	'      yet during this session always shows blank, even if Steam already has real text for it.
+	Private Sub CheckItemLocalizationOnSteamIfNeeded()
+		If Me.theCurrentLanguageCode = "english" Then
+			Exit Sub
+		End If
+		If Me.theSelectedItem Is Nothing OrElse Me.theSelectedItem.ID = "0" Then
+			Exit Sub
+		End If
+		If Me.theSelectedItem.GetLocalization(Me.theCurrentLanguageCode) IsNot Nothing Then
+			Exit Sub
+		End If
+		If Me.theCheckedLocalizationLanguages.Contains(Me.theCurrentLanguageCode) Then
+			Exit Sub
+		End If
+		Me.theCheckedLocalizationLanguages.Add(Me.theCurrentLanguageCode)
+
+		Dim input As New BackgroundSteamPipe.GetItemLocalizationInputInfo(Me.theSelectedItem.ID, Me.theCurrentLanguageCode)
+		Me.theBackgroundSteamPipe.GetItemLocalization(AddressOf Me.GetItemLocalization_ProgressChanged, AddressOf Me.GetItemLocalization_RunWorkerCompleted, input)
+	End Sub
 
 #End Region
 
@@ -501,6 +585,33 @@ Public Class PublishUserControl
 		Me.theSelectedItem.Tags = Me.theTagsWidget.ItemTags
 	End Sub
 
+	Private Sub ItemLanguageComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ItemLanguageComboBox.SelectedIndexChanged
+		If Me.theSelectedItem Is Nothing Then
+			Exit Sub
+		End If
+		Me.theCurrentLanguageCode = CStr(Me.ItemLanguageComboBox.SelectedValue)
+		Me.LoadTitleAndDescriptionForCurrentLanguage()
+		Me.CheckItemLocalizationOnSteamIfNeeded()
+	End Sub
+
+	Private Sub ItemTitleTextBox_TextChanged(sender As Object, e As EventArgs) Handles ItemTitleTextBox.TextChanged
+		If Me.theIsLoadingLanguageText OrElse Me.theSelectedItem Is Nothing Then
+			Exit Sub
+		End If
+		Me.SetCurrentLanguageTitle(Me.ItemTitleTextBox.Text)
+		Me.UpdateItemTitleLabel()
+		Me.UpdateItemChangedStatus()
+	End Sub
+
+	Private Sub ItemDescriptionTextBox_TextChanged(sender As Object, e As EventArgs) Handles ItemDescriptionTextBox.TextChanged
+		If Me.theIsLoadingLanguageText OrElse Me.theSelectedItem Is Nothing Then
+			Exit Sub
+		End If
+		Me.SetCurrentLanguageDescription(Me.ItemDescriptionTextBox.Text)
+		Me.UpdateItemDescriptionLabel()
+		Me.UpdateItemChangedStatus()
+	End Sub
+
 	Private Sub PublishItemButton_Click(sender As Object, e As EventArgs) Handles PublishItemButton.Click
 		Me.PublishItem()
 	End Sub
@@ -580,7 +691,16 @@ Public Class PublishUserControl
 				End If
 			Next
 			If Not itemHasBeenFound Then
-				Me.theDisplayedItems.Add(publishedItem)
+				Try
+					Me.theDisplayedItems.Add(publishedItem)
+				Catch ex As ArgumentOutOfRangeException
+					'NOTE: Known .NET DataGridView bug: inserting a bound row can throw here if it
+					'      races with a Sort() (e.g. the user clicked a column header to sort while
+					'      this background list load was still streaming items in). Log and skip
+					'      this one row rather than crashing; it will still appear once loading
+					'      finishes and the grid gets refreshed/re-sorted.
+					Me.LogTextBox.AppendText("WARNING: Could not add item " + publishedItem.ID + " to the grid (" + ex.Message + ")" + vbCrLf)
+				End Try
 			End If
 
 			itemHasBeenFound = False
@@ -605,6 +725,7 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub GetPublishedItems_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
+		Me.theItemListIsLoading = False
 		If e.Cancelled Then
 			Dim debug As Integer = 4242
 		Else
@@ -649,6 +770,9 @@ Public Class PublishUserControl
 						Me.theSelectedItem.Updated = publishedItem.Updated
 						Me.theSelectedItem.Title = publishedItem.Title
 						Me.theSelectedItem.Description = publishedItem.Description
+						'NOTE: ItemTitleTextBox/ItemDescriptionTextBox are no longer bound directly to
+						'      Title/Description (see InitItemDetailWidgets), so refresh them manually.
+						Me.LoadTitleAndDescriptionForCurrentLanguage()
 						Me.theSelectedItem.ContentSize = publishedItem.ContentSize
 						If Me.theSteamAppInfo.UsesSteamUGC AndAlso publishedItem.ContentPathFolderOrFileName = "" Then
 							Me.theSelectedItem.ContentPathFolderOrFileName = "Folder_" + publishedItem.ID
@@ -691,6 +815,46 @@ Public Class PublishUserControl
 		Me.ItemPreviewImagePathFileNameTextBox.Enabled = True
 		Me.ItemTagsGroupBox.Enabled = True
 		Me.UpdateItemDetailWidgets()
+	End Sub
+
+	Private Sub GetItemLocalization_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs)
+		If e.ProgressPercentage = 0 Then
+			Me.LogTextBox.AppendText(CStr(e.UserState))
+		End If
+	End Sub
+
+	Private Sub GetItemLocalization_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
+		If e.Cancelled Then
+			Exit Sub
+		End If
+
+		Dim output As BackgroundSteamPipe.GetItemLocalizationOutputInfo = CType(e.Result, BackgroundSteamPipe.GetItemLocalizationOutputInfo)
+
+		'NOTE: Ignore a stale response if the user has since selected a different item.
+		If Me.theSelectedItem Is Nothing OrElse Me.theSelectedItem.ID <> output.ItemID_text Then
+			Exit Sub
+		End If
+
+		If output.Result = "success" Then
+			If output.Title <> "" OrElse output.Description <> "" Then
+				Dim aLocalization As WorkshopItemLocalization = Me.theSelectedItem.GetOrCreateLocalization(output.Language)
+				aLocalization.Title = output.Title
+				aLocalization.Description = output.Description
+				'NOTE: This is text that already existed on Steam, not something the user just
+				'      typed, so it should not be treated as an unpublished local change.
+				aLocalization.TitleIsChanged = False
+				aLocalization.DescriptionIsChanged = False
+
+				'NOTE: Only refresh the visible textboxes if the user is both still viewing this
+				'      same language and has not already started typing something while this was
+				'      loading in the background.
+				If Me.theCurrentLanguageCode = output.Language AndAlso Me.ItemTitleTextBox.Text = "" AndAlso Me.ItemDescriptionTextBox.Text = "" Then
+					Me.LoadTitleAndDescriptionForCurrentLanguage()
+				End If
+			End If
+		Else
+			Me.LogTextBox.AppendText("ERROR: Unable to check existing " + output.Language + " title/description: " + output.Result + vbCrLf)
+		End If
 	End Sub
 
 	Private Sub DeletePublishedItemFromWorkshop_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs)
@@ -896,6 +1060,7 @@ Public Class PublishUserControl
 
 		Me.GetUserSteamAppCloudQuota()
 
+		Me.theItemListIsLoading = True
 		Me.theBackgroundSteamPipe.GetPublishedItems(AddressOf Me.GetPublishedItems_ProgressChanged, AddressOf Me.GetPublishedItems_RunWorkerCompleted, Me.theSteamAppId.ToString())
 	End Sub
 
@@ -1099,7 +1264,7 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub UpdateItemListWidgets(ByVal isProgress As Boolean)
-		If Not isProgress Then
+		If Not isProgress AndAlso Not Me.theItemListIsLoading Then
 			' If the DataGridView is not currently sorted, then sortedColumn is Nothing.
 			Dim sortedColumn As DataGridViewColumn = Me.ItemsDataGridView.SortedColumn
 			If sortedColumn IsNot Nothing Then
@@ -1201,6 +1366,11 @@ Public Class PublishUserControl
 		Me.ItemGroupBox.Enabled = True
 		Me.UpdateItemGroupBoxLabel()
 
+		Me.theCurrentLanguageCode = "english"
+		Me.theCheckedLocalizationLanguages.Clear()
+		Me.ItemLanguageComboBox.SelectedIndex = 0
+		Me.LoadTitleAndDescriptionForCurrentLanguage()
+
 		Me.UpdateItemTitleLabel()
 		Me.ItemTitleTextBox.ReadOnly = editableTextBoxesAreReadOnly
 
@@ -1257,20 +1427,50 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub UpdateItemTitleLabel()
-		Dim titleSize As Integer = Me.theSelectedItem.Title.Length
+		Dim titleText As String
+		Dim titleIsChanged As Boolean
+		If Me.theCurrentLanguageCode = "english" Then
+			titleText = Me.theSelectedItem.Title
+			titleIsChanged = Me.theSelectedItem.TitleIsChanged
+		Else
+			Dim aLocalization As WorkshopItemLocalization = Me.theSelectedItem.GetLocalization(Me.theCurrentLanguageCode)
+			If aLocalization IsNot Nothing Then
+				titleText = aLocalization.Title
+				titleIsChanged = aLocalization.TitleIsChanged
+			Else
+				titleText = ""
+				titleIsChanged = False
+			End If
+		End If
+		Dim titleSize As Integer = titleText.Length
 		Dim titleSizeMax As Integer = CInt(Steamworks.Constants.k_cchPublishedDocumentTitleMax)
 		Dim changedMarker As String = ""
-		If Me.theSelectedItem.TitleIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
+		If titleIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
 		Me.ItemTitleLabel.Text = "标题" + changedMarker + " (" + titleSize.ToString() + " / " + titleSizeMax.ToString() + " 最多字数):"
 	End Sub
 
 	Private Sub UpdateItemDescriptionLabel()
-		Dim descriptionSize As Integer = Me.theSelectedItem.Description.Length
+		Dim descriptionText As String
+		Dim descriptionIsChanged As Boolean
+		If Me.theCurrentLanguageCode = "english" Then
+			descriptionText = Me.theSelectedItem.Description
+			descriptionIsChanged = Me.theSelectedItem.DescriptionIsChanged
+		Else
+			Dim aLocalization As WorkshopItemLocalization = Me.theSelectedItem.GetLocalization(Me.theCurrentLanguageCode)
+			If aLocalization IsNot Nothing Then
+				descriptionText = aLocalization.Description
+				descriptionIsChanged = aLocalization.DescriptionIsChanged
+			Else
+				descriptionText = ""
+				descriptionIsChanged = False
+			End If
+		End If
+		Dim descriptionSize As Integer = descriptionText.Length
 		Dim descriptionSizeMax As Integer = CInt(Steamworks.Constants.k_cchPublishedDocumentDescriptionMax)
 		Dim changedMarker As String = ""
-		If Me.theSelectedItem.DescriptionIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
+		If descriptionIsChanged AndAlso Not Me.theSelectedItem.IsDraft Then
 			changedMarker = AppConstants.ChangedMarker
 		End If
 		Me.ItemDescriptionLabel.Text = "描述" + changedMarker + " (" + descriptionSize.ToString() + " / " + descriptionSizeMax.ToString() + " 最多字数):"
@@ -1895,6 +2095,27 @@ Public Class PublishUserControl
 	Private theSelectedItemDetailsIsChangingViaMe As Boolean
 	Private theSavedPreviewImagePathFileName As String
 	Private theUnchangedSelectedTemplateItem As WorkshopItem
+
+	'NOTE: Which language ItemLanguageComboBox currently shows in ItemTitleTextBox/ItemDescriptionTextBox.
+	'      "english" is the item's own Title/Description; any other language is stored in Item.Localizations.
+	Private theCurrentLanguageCode As String = "english"
+
+	'NOTE: Language codes already checked against Steam (via CheckItemLocalizationOnSteamIfNeeded)
+	'      for whichever item is currently selected. Cleared whenever a different item is selected
+	'      (see UpdateItemDetailWidgets), so each item gets checked fresh, but re-selecting the
+	'      same language again for the same item does not re-query Steam every time.
+	Private theCheckedLocalizationLanguages As New HashSet(Of String)()
+
+	'NOTE: True while Me.theBackgroundSteamPipe.GetPublishedItems is still streaming items in
+	'      (set just before that call, cleared in GetPublishedItems_RunWorkerCompleted). Used to
+	'      avoid re-sorting ItemsDataGridView (see UpdateItemListWidgets) while rows are still
+	'      being inserted into it in the background - doing both at once can hit a .NET
+	'      DataGridView bug ("indexStart" ArgumentOutOfRangeException inside
+	'      CorrectRowFrozenState) triggered by adding a bound row right after a Sort() call.
+	Private theItemListIsLoading As Boolean = False
+	'NOTE: True while ItemTitleTextBox/ItemDescriptionTextBox.Text is being set programmatically
+	'      (loading a language's stored text), so the TextChanged handlers do not write it right back.
+	Private theIsLoadingLanguageText As Boolean = False
 
 	Private theBackgroundSteamPipe As BackgroundSteamPipe
 

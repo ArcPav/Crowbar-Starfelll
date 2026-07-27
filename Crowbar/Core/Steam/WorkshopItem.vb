@@ -46,6 +46,8 @@ Public Class WorkshopItem
 		Me.theTagsAsTextLine = ""
 		Me.theTagsIsChanged = False
 
+		Me.theLocalizations = New BindingListEx(Of WorkshopItemLocalization)()
+
 		Me.theItemIsChanged = False
 	End Sub
 
@@ -83,6 +85,11 @@ Public Class WorkshopItem
 		Next
 		Me.theTagsAsTextLine = originalObject.TagsAsTextLine
 		Me.theTagsIsChanged = False
+
+		Me.theLocalizations = New BindingListEx(Of WorkshopItemLocalization)()
+		For Each originalLocalization As WorkshopItemLocalization In originalObject.Localizations
+			Me.theLocalizations.Add(CType(originalLocalization.Clone(), WorkshopItemLocalization))
+		Next
 
 		'NOTE: Clone becomes a draft item; thus theItemIsChanged is always False.
 		Me.theItemIsChanged = False
@@ -469,6 +476,17 @@ Public Class WorkshopItem
 		End Set
 	End Property
 
+	'NOTE: Title/Description for languages other than "english". The item's own Title/Description
+	'      properties above continue to hold the "english" (default) text.
+	Public Property Localizations As BindingListEx(Of WorkshopItemLocalization)
+		Get
+			Return Me.theLocalizations
+		End Get
+		Set(value As BindingListEx(Of WorkshopItemLocalization))
+			Me.theLocalizations = value
+		End Set
+	End Property
+
 	<XmlIgnore()>
 	Public Property IsChanged As Boolean
 		Get
@@ -484,6 +502,10 @@ Public Class WorkshopItem
 				Me.thePreviewImagePathFileNameIsChanged = False
 				Me.theVisibilityIsChanged = False
 				Me.theTagsIsChanged = False
+				For Each aLocalization As WorkshopItemLocalization In Me.theLocalizations
+					aLocalization.TitleIsChanged = False
+					aLocalization.DescriptionIsChanged = False
+				Next
 			End If
 
 			If Me.theItemIsChanged <> value Then
@@ -538,6 +560,15 @@ Public Class WorkshopItem
 			Me.thePreviewImagePathFileNameIsChanged = True
 		End If
 
+		For Each aLocalization As WorkshopItemLocalization In Me.theLocalizations
+			If aLocalization.Title <> "" Then
+				aLocalization.TitleIsChanged = True
+			End If
+			If aLocalization.Description <> "" Then
+				aLocalization.DescriptionIsChanged = True
+			End If
+		Next
+
 		'NOTE: Always set IsChanged for Visibility and Tags.
 		Me.theVisibilityIsChanged = True
 		Me.theTagsIsChanged = True
@@ -545,6 +576,27 @@ Public Class WorkshopItem
 		'NOTE: Always set IsChanged for item.
 		Me.theItemIsChanged = True
 	End Sub
+
+	'NOTE: Returns Nothing if there is no localization entry yet for the given language.
+	Public Function GetLocalization(ByVal language As String) As WorkshopItemLocalization
+		For Each aLocalization As WorkshopItemLocalization In Me.theLocalizations
+			If aLocalization.Language = language Then
+				Return aLocalization
+			End If
+		Next
+		Return Nothing
+	End Function
+
+	'NOTE: Returns the existing localization entry for the given language, creating and adding
+	'      a new (empty) one if it does not exist yet.
+	Public Function GetOrCreateLocalization(ByVal language As String) As WorkshopItemLocalization
+		Dim aLocalization As WorkshopItemLocalization = Me.GetLocalization(language)
+		If aLocalization Is Nothing Then
+			aLocalization = New WorkshopItemLocalization(language)
+			Me.theLocalizations.Add(aLocalization)
+		End If
+		Return aLocalization
+	End Function
 
 #End Region
 
@@ -587,6 +639,27 @@ Public Class WorkshopItem
 		<Description("非公开")> Unlisted = 3
 	End Enum
 
+	'NOTE: LanguageCode must match the Steam API language code used with SetItemUpdateLanguage.
+	'      https://partner.steamgames.com/doc/store/localization/languages
+	Public Structure SteamLanguageOption
+		Public Property LanguageCode As String
+		Public Property DisplayName As String
+		Public Sub New(ByVal languageCode As String, ByVal displayName As String)
+			Me.LanguageCode = languageCode
+			Me.DisplayName = displayName
+		End Sub
+	End Structure
+
+	'NOTE: "english" is always first and is handled specially - it is the item's own
+	'      Title/Description, not an entry in Localizations. See GetLocalization/GetOrCreateLocalization.
+	Public Shared ReadOnly SupportedLocalizationLanguages As New List(Of SteamLanguageOption) From {
+		New SteamLanguageOption("english", "英语"),
+		New SteamLanguageOption("schinese", "简中"),
+		New SteamLanguageOption("tchinese", "繁中"),
+		New SteamLanguageOption("japanese", "日语"),
+		New SteamLanguageOption("koreana", "韩语")
+	}
+
 #End Region
 
 #Region "Data"
@@ -625,6 +698,8 @@ Public Class WorkshopItem
 	Private theTags As BindingListEx(Of String)
 	Private theTagsAsTextLine As String
 	Private theTagsIsChanged As Boolean
+
+	Private theLocalizations As BindingListEx(Of WorkshopItemLocalization)
 
 	Private theItemIsChanged As Boolean
 

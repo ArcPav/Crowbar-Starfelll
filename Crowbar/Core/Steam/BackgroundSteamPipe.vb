@@ -349,6 +349,99 @@ Public Class BackgroundSteamPipe
 
 #End Region
 
+#Region "GetItemLocalization"
+
+	'NOTE: On-demand check of whether an already-published item already has a Title/Description
+	'      stored on Steam for one specific non-English language. Triggered by PublishUserControl
+	'      when the user switches ItemLanguageComboBox to a language it has not checked yet this
+	'      session, so previously published localized text can be shown instead of always
+	'      appearing blank. Only checks the one language actually being viewed, not every language.
+	Public Class GetItemLocalizationInputInfo
+		Public ItemID_text As String
+		Public Language As String
+
+		Public Sub New(ByVal iItemID_text As String, ByVal iLanguage As String)
+			Me.ItemID_text = iItemID_text
+			Me.Language = iLanguage
+		End Sub
+	End Class
+
+	Public Class GetItemLocalizationOutputInfo
+		Public ItemID_text As String
+		Public Language As String
+		Public Title As String
+		Public Description As String
+		Public Result As String
+
+		Public Sub New(ByVal iItemID_text As String, ByVal iLanguage As String, ByVal iTitle As String, ByVal iDescription As String, ByVal iResult As String)
+			Me.ItemID_text = iItemID_text
+			Me.Language = iLanguage
+			Me.Title = iTitle
+			Me.Description = iDescription
+			Me.Result = iResult
+		End Sub
+	End Class
+
+	Public Sub GetItemLocalization(ByVal given_ProgressChanged As ProgressChangedEventHandler, ByVal given_RunWorkerCompleted As RunWorkerCompletedEventHandler, ByVal input As GetItemLocalizationInputInfo)
+		Me.theGetItemLocalizationBackgroundWorker = BackgroundWorkerEx.RunBackgroundWorker(Me.theGetItemLocalizationBackgroundWorker, AddressOf Me.GetItemLocalization_DoWork, given_ProgressChanged, given_RunWorkerCompleted, input)
+	End Sub
+
+	'NOTE: This is run in a background thread.
+	Private Sub GetItemLocalization_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
+		Dim bw As BackgroundWorkerEx = CType(sender, BackgroundWorkerEx)
+		Me.theActiveBackgroundWorkers.Add(bw)
+		Dim input As GetItemLocalizationInputInfo = CType(e.Argument, GetItemLocalizationInputInfo)
+
+		'NOTE: Kill any previous still-running check (e.g. the user flipped through several
+		'      languages quickly) since only the latest one still matters.
+		If Me.theGetItemLocalizationSteamPipe IsNot Nothing Then
+			Me.theGetItemLocalizationSteamPipe.Kill()
+		End If
+		Me.theGetItemLocalizationSteamPipe = New SteamPipe()
+		Me.theActiveSteamPipes.Add(Me.theGetItemLocalizationSteamPipe)
+
+		Dim result As String = Me.theGetItemLocalizationSteamPipe.Open("GetItemLocalization", bw, "Checking " + input.Language + " title/description")
+		If result <> "success" Then
+			e.Cancel = True
+			Me.theActiveSteamPipes.Remove(Me.theGetItemLocalizationSteamPipe)
+			Me.theGetItemLocalizationSteamPipe = Nothing
+			Me.theActiveBackgroundWorkers.Remove(bw)
+			Exit Sub
+		End If
+
+		If bw.CancellationPending Then
+			Me.theGetItemLocalizationSteamPipe.Kill()
+			e.Cancel = True
+			Me.theActiveSteamPipes.Remove(Me.theGetItemLocalizationSteamPipe)
+			Me.theGetItemLocalizationSteamPipe = Nothing
+			Me.theActiveBackgroundWorkers.Remove(bw)
+			Exit Sub
+		End If
+
+		Dim title As String = ""
+		Dim description As String = ""
+		result = Me.theGetItemLocalizationSteamPipe.SteamUGC_GetItemLocalization(input.ItemID_text, input.Language, title, description)
+
+		Me.theGetItemLocalizationSteamPipe.Shut()
+		Me.theActiveSteamPipes.Remove(Me.theGetItemLocalizationSteamPipe)
+		Me.theGetItemLocalizationSteamPipe = Nothing
+
+		If bw.CancellationPending Then
+			e.Cancel = True
+			Me.theActiveBackgroundWorkers.Remove(bw)
+			Exit Sub
+		End If
+
+		Me.theActiveBackgroundWorkers.Remove(bw)
+		Dim output As New GetItemLocalizationOutputInfo(input.ItemID_text, input.Language, title, description, result)
+		e.Result = output
+	End Sub
+
+	Private theGetItemLocalizationBackgroundWorker As BackgroundWorkerEx
+	Private theGetItemLocalizationSteamPipe As SteamPipe
+
+#End Region
+
 #Region "DeletePublishedItemFromWorkshop"
 
 	Public Sub DeletePublishedItemFromWorkshop(ByVal given_ProgressChanged As ProgressChangedEventHandler, ByVal given_RunWorkerCompleted As RunWorkerCompletedEventHandler, ByVal itemID_text As String)
@@ -571,6 +664,14 @@ Public Class BackgroundSteamPipe
 							outputInfo.Result = "Succeeded"
 							If outputInfo.PublishedItemID = "0" Then
 								outputInfo.PublishedItemID = inputInfo.Item.ID
+							End If
+
+							'NOTE: Publish any additional (non-English) localized titles/descriptions.
+							'      Do this after the main update succeeds so a localization problem
+							'      never blocks or rolls back the main (English) publish.
+							Dim localizationsResult As String = Me.PublishLocalizationsViaSteamUGC(steamPipe, inputInfo, appID_text, itemID_text)
+							If localizationsResult <> "success" Then
+								Me.thePublishItemBackgroundWorker.ReportProgress(0, "WARNING: Publishing one or more localized (non-English) titles/descriptions failed. Review log messages above." + vbCrLf)
 							End If
 						ElseIf result = "success_agreement" Then
 							If outputInfo.PublishedItemID = "0" Then
@@ -832,6 +933,58 @@ Public Class BackgroundSteamPipe
 		End If
 
 		Return result
+	End Function
+
+	'NOTE: Steam requires a separate StartItemUpdate/SetItemUpdateLanguage/SubmitItemUpdate cycle
+	'      for each additional (non-English) language - SetItemUpdateLanguage only affects the
+	'      SetItemTitle/SetItemDescription calls made before the next SubmitItemUpdate.
+	'      This is run in a background thread.
+	Private Function PublishLocalizationsViaSteamUGC(ByVal steamPipe As SteamPipe, ByVal inputInfo As PublishItemInputInfo, ByVal appID_text As String, ByVal itemID_text As String) As String
+		Dim overallResult As String = "success"
+
+		For Each aLocalization As WorkshopItemLocalization In inputInfo.Item.Localizations
+			If aLocalization.TitleIsChanged OrElse aLocalization.DescriptionIsChanged Then
+				Me.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing " + aLocalization.Language + " title/description." + vbCrLf)
+
+				Dim result As String = Me.StartItemUpdate(steamPipe, appID_text, itemID_text)
+				If result <> "success" Then
+					overallResult = "error"
+					Continue For
+				End If
+
+				Dim setLanguageResult As String = steamPipe.SteamUGC_SetItemUpdateLanguage(aLocalization.Language)
+				If setLanguageResult <> "success" Then
+					Me.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to set update language to " + aLocalization.Language + "." + vbCrLf)
+					overallResult = "error"
+					Continue For
+				End If
+
+				If aLocalization.TitleIsChanged AndAlso aLocalization.Title <> "" Then
+					Dim setItemTitleResult As String = steamPipe.SteamUGC_SetItemTitle(aLocalization.Title)
+					If setItemTitleResult <> "success" Then
+						Me.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to set " + aLocalization.Language + " title." + vbCrLf)
+						overallResult = "error"
+					End If
+				End If
+
+				If aLocalization.DescriptionIsChanged AndAlso aLocalization.Description <> "" Then
+					Dim setItemDescriptionResult As String = steamPipe.SteamUGC_SetItemDescription(aLocalization.Description)
+					If setItemDescriptionResult <> "success" Then
+						Me.thePublishItemBackgroundWorker.ReportProgress(0, "ERROR: Unable to set " + aLocalization.Language + " description." + vbCrLf)
+						overallResult = "error"
+					End If
+				End If
+
+				Dim submitResult As String = Me.SubmitItemUpdate(steamPipe, "")
+				If Not submitResult.StartsWith("success") Then
+					overallResult = "error"
+				Else
+					Me.thePublishItemBackgroundWorker.ReportProgress(0, "Publishing " + aLocalization.Language + " title/description succeeded." + vbCrLf)
+				End If
+			End If
+		Next
+
+		Return overallResult
 	End Function
 
 	'NOTE: This is run in a background thread.

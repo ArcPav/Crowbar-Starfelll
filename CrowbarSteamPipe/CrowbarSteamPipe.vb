@@ -87,6 +87,8 @@ Public Module CrowbarSteamPipe
 					SteamUGC_CreateQueryUserUGCRequest()
 				ElseIf command = "SteamUGC_DeleteItem" Then
 					SteamUGC_DeleteItem()
+				ElseIf command = "SteamUGC_GetItemLocalization" Then
+					SteamUGC_GetItemLocalization()
 					'ElseIf command = "SteamUGC_DownloadItem" Then
 					'	SteamUGC_DownloadItem()
 					'ElseIf command = "SteamUGC_GetItemUpdateProgress" Then
@@ -1147,6 +1149,62 @@ Public Module CrowbarSteamPipe
 
 #End Region
 
+#Region "SteamUGC_GetItemLocalization"
+
+	'NOTE: Queries Steam for the Title/Description of a single already-published item, in one
+	'      specific non-English language, using ISteamUGC.SetLanguage. This is separate from
+	'      SteamUGC_CreateQueryUGCDetailsRequest/SteamUGC_SendQueryUGCRequest above because
+	'      Steam only returns one language's Title/Description per query, so checking a
+	'      language requires its own dedicated query. Used on-demand (only for the language
+	'      the user actually has selected in ItemLanguageComboBox), not for every language.
+	Private Sub SteamUGC_GetItemLocalization()
+		Dim itemID_Text As String
+		itemID_Text = sr.ReadLine()
+		Dim itemID As PublishedFileId_t
+		itemID.m_PublishedFileId = ULong.Parse(itemID_Text)
+		Dim publishedFileIDList() As PublishedFileId_t = {itemID}
+
+		Dim language As String
+		language = sr.ReadLine()
+
+		theUGCQueryHandleForLocalization = SteamUGC.CreateQueryUGCDetailsRequest(publishedFileIDList, 1)
+		If theUGCQueryHandleForLocalization = UGCQueryHandle_t.Invalid Then
+			sw.WriteLine("error")
+			Exit Sub
+		End If
+
+		'NOTE: Description is off by default on some query types (see SteamUGC_CreateQueryUserUGCRequest),
+		'      so ask for it explicitly here since it is the whole point of this query.
+		SteamUGC.SetReturnLongDescription(theUGCQueryHandleForLocalization, True)
+		SteamUGC.SetLanguage(theUGCQueryHandleForLocalization, language)
+
+		Dim result As SteamAPICall_t = SteamUGC.SendQueryUGCRequest(theUGCQueryHandleForLocalization)
+		CrowbarSteamPipe.SetResultAndRunCallbacks(Of SteamUGCQueryCompleted_t)(AddressOf OnGetItemLocalizationQueryCompleted, result)
+	End Sub
+
+	Private Sub OnGetItemLocalizationQueryCompleted(ByVal pCallResult As SteamUGCQueryCompleted_t, ByVal bIOFailure As Boolean)
+		Try
+			If pCallResult.m_eResult = EResult.k_EResultOK AndAlso pCallResult.m_unNumResultsReturned > 0 Then
+				Dim itemDetails As New SteamUGCDetails_t()
+				SteamUGC.GetQueryUGCResult(theUGCQueryHandleForLocalization, 0, itemDetails)
+
+				sw.WriteLine("success")
+				WriteTextThatMightHaveMultipleLines(itemDetails.m_rgchTitle)
+				WriteTextThatMightHaveMultipleLines(itemDetails.m_rgchDescription)
+			Else
+				sw.WriteLine(GetErrorMessage(pCallResult.m_eResult))
+			End If
+		Catch ex As Exception
+			Console.WriteLine("EXCEPTION: " + ex.Message)
+			sw.WriteLine("EXCEPTION: " + ex.Message)
+		End Try
+
+		SteamUGC.ReleaseQueryUGCRequest(theUGCQueryHandleForLocalization)
+		theCallResultIsFinished = True
+	End Sub
+
+#End Region
+
 #Region "SteamUGC_CreateQueryUserUGCRequest"
 
 	Private Sub SteamUGC_CreateQueryUserUGCRequest()
@@ -1194,6 +1252,14 @@ Public Module CrowbarSteamPipe
 			SteamUGC.SetReturnMetadata(theUGCQueryHandle, False)
 			SteamUGC.SetReturnChildren(theUGCQueryHandle, False)
 			SteamUGC.SetReturnAdditionalPreviews(theUGCQueryHandle, False)
+
+			'NOTE: Without this, Steam returns Title/Description in whichever language the local
+			'      Steam Client's interface is currently set to, instead of the item's actual
+			'      default/"english" Title/Description (see WorkshopItemLocalization.vb). That
+			'      silently breaks anything that assumes item.Title/item.Description is English -
+			'      including title search below, until GetPublishedItemDetailsViaSteamRemoteStorage
+			'      re-fetches and overwrites it with the true default title after an item is opened.
+			SteamUGC.SetLanguage(theUGCQueryHandle, "english")
 		Else
 			'Console.WriteLine("SteamUGC_CreateQueryUserUGCRequest - invalid UGCQueryHandle_t")
 			sw.WriteLine("error")
@@ -1613,7 +1679,7 @@ Public Module CrowbarSteamPipe
 	'      a carriage return (0x000d), a line feed (0x000a), a carriage return followed by a line feed, Environment.NewLine, or the end-of-stream marker.
 	'      https://docs.microsoft.com/en-us/dotnet/api/system.io.textreader.readline?view=netframework-4.0
 	Private Sub WriteTextThatMightHaveMultipleLines(ByVal text As String)
-		text = ConvertText(text)
+		' text = ConvertText(text)
 
 		'NOTE: Delete all CR in text because they are not needed and will show as blank characters in Windows TextBox.
 		text = text.Replace(vbCr, "")
@@ -1731,6 +1797,7 @@ Public Module CrowbarSteamPipe
 	Private theItemIsUploading As Boolean
 	Private theCallResultIsFinished As Boolean
 	Private theUGCQueryHandle As UGCQueryHandle_t
+	Private theUGCQueryHandleForLocalization As UGCQueryHandle_t
 	Private theUGCUpdateHandle As UGCUpdateHandle_t
 
 	Private thePublishedFileUpdateHandle As PublishedFileUpdateHandle_t

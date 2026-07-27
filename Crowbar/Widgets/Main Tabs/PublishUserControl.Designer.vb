@@ -56,6 +56,7 @@ Partial Class PublishUserControl
         Me.ItemOwnerTextBox = New Crowbar.TextBoxEx()
         Me.ItemTitleLabel = New System.Windows.Forms.Label()
         Me.ItemTitleTextBox = New Crowbar.TextBoxEx()
+        Me.ItemLanguageComboBox = New System.Windows.Forms.ComboBox()
         Me.ItemBottomPanel = New System.Windows.Forms.Panel()
         Me.ItemContentFolderOrFileLabel = New System.Windows.Forms.Label()
         Me.ItemContentPathFileNameTextBox = New Crowbar.TextBoxEx()
@@ -394,7 +395,7 @@ Partial Class PublishUserControl
         Me.MiddleBottomSplitContainer.Panel2.Controls.Add(Me.QueueListView)
         Me.MiddleBottomSplitContainer.Panel2MinSize = 45
         Me.MiddleBottomSplitContainer.Size = New System.Drawing.Size(1027, 541)
-        Me.MiddleBottomSplitContainer.SplitterDistance = 429
+        Me.MiddleBottomSplitContainer.SplitterDistance = 427
         Me.MiddleBottomSplitContainer.SplitterWidth = 6
         Me.MiddleBottomSplitContainer.TabIndex = 26
         '
@@ -408,7 +409,7 @@ Partial Class PublishUserControl
         Me.ItemGroupBox.Name = "ItemGroupBox"
         Me.ItemGroupBox.Padding = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.ItemGroupBox.SelectedValue = Nothing
-        Me.ItemGroupBox.Size = New System.Drawing.Size(1019, 417)
+        Me.ItemGroupBox.Size = New System.Drawing.Size(1019, 415)
         Me.ItemGroupBox.TabIndex = 31
         Me.ItemGroupBox.TabStop = False
         Me.ItemGroupBox.Text = "物品"
@@ -432,7 +433,7 @@ Partial Class PublishUserControl
         '
         Me.ItemTagsSplitContainer.Panel2.Controls.Add(Me.ItemTagsGroupBox)
         Me.ItemTagsSplitContainer.Panel2.Padding = New System.Windows.Forms.Padding(0, 0, 4, 6)
-        Me.ItemTagsSplitContainer.Size = New System.Drawing.Size(1011, 387)
+        Me.ItemTagsSplitContainer.Size = New System.Drawing.Size(1011, 385)
         Me.ItemTagsSplitContainer.SplitterDistance = 772
         Me.ItemTagsSplitContainer.TabIndex = 25
         '
@@ -514,7 +515,7 @@ Partial Class PublishUserControl
         '
         Me.ItemChangeNoteTextBox.AcceptsTab = True
         Me.ItemChangeNoteTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ItemChangeNoteTextBox.CueBannerText = ""
+        Me.ItemChangeNoteTextBox.CueBannerText = "*非必须"
         Me.ItemChangeNoteTextBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ItemChangeNoteTextBox.Font = New System.Drawing.Font("Cascadia Mono", 10.0!, System.Drawing.FontStyle.Bold)
         Me.ItemChangeNoteTextBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
@@ -581,6 +582,7 @@ Partial Class PublishUserControl
         Me.ItemTopPanel.Controls.Add(Me.ItemUpdatedTextBox)
         Me.ItemTopPanel.Controls.Add(Me.ItemTitleLabel)
         Me.ItemTopPanel.Controls.Add(Me.ItemTitleTextBox)
+        Me.ItemTopPanel.Controls.Add(Me.ItemLanguageComboBox)
         Me.ItemTopPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.ItemTopPanel.Location = New System.Drawing.Point(0, 0)
         Me.ItemTopPanel.Margin = New System.Windows.Forms.Padding(4)
@@ -624,7 +626,7 @@ Partial Class PublishUserControl
         Me.ItemTitleLabel.Location = New System.Drawing.Point(4, 39)
         Me.ItemTitleLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.ItemTitleLabel.Name = "ItemTitleLabel"
-        Me.ItemTitleLabel.Size = New System.Drawing.Size(769, 17)
+        Me.ItemTitleLabel.Size = New System.Drawing.Size(600, 17)
         Me.ItemTitleLabel.TabIndex = 8
         Me.ItemTitleLabel.Text = "标题 (### / ### 最多字数):"
         '
@@ -639,6 +641,17 @@ Partial Class PublishUserControl
         Me.ItemTitleTextBox.Size = New System.Drawing.Size(768, 25)
         Me.ItemTitleTextBox.TabIndex = 4
         Me.ItemTitleTextBox.WordWrap = False
+        '
+        'ItemLanguageComboBox
+        '
+        Me.ItemLanguageComboBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ItemLanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ItemLanguageComboBox.FormattingEnabled = True
+        Me.ItemLanguageComboBox.Location = New System.Drawing.Point(612, 36)
+        Me.ItemLanguageComboBox.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.ItemLanguageComboBox.Name = "ItemLanguageComboBox"
+        Me.ItemLanguageComboBox.Size = New System.Drawing.Size(160, 26)
+        Me.ItemLanguageComboBox.TabIndex = 39
         '
         'ItemBottomPanel
         '
@@ -833,7 +846,7 @@ Partial Class PublishUserControl
         Me.ItemTagsGroupBox.Name = "ItemTagsGroupBox"
         Me.ItemTagsGroupBox.Padding = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.ItemTagsGroupBox.SelectedValue = Nothing
-        Me.ItemTagsGroupBox.Size = New System.Drawing.Size(231, 381)
+        Me.ItemTagsGroupBox.Size = New System.Drawing.Size(231, 379)
         Me.ItemTagsGroupBox.TabIndex = 17
         Me.ItemTagsGroupBox.TabStop = False
         Me.ItemTagsGroupBox.Text = "标签"
@@ -936,6 +949,7 @@ Partial Class PublishUserControl
 	Friend WithEvents ItemTagsSplitContainer As SplitContainer
 	Friend WithEvents OpenWorkshopPageButton As Button
 	Friend WithEvents ItemTitleLabel As Label
+	Friend WithEvents ItemLanguageComboBox As ComboBox
 	Friend WithEvents DeleteItemButton As Button
 	Friend WithEvents ItemVisibilityComboBox As ComboBox
 	Friend WithEvents BrowseItemPreviewImagePathFileNameButton As Button

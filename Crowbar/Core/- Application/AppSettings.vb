@@ -109,7 +109,7 @@ Public Class AppSettings
 		Me.theEnableDarkMode = False
 
 		Me.theAppFontName = "Microsoft YaHei"
-		Me.theAppFontSize = 9.0F
+		Me.theAppFontSize = 10.0F
 
 		'Me.Init()
 	End Sub
